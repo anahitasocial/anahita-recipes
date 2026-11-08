@@ -8,7 +8,9 @@ make it first, following its README as far as `make apply`, and this
 recipe moves the old site into it.
 
 **Not tried yet as a recipe.** Every step was done for banu.io, by scripts
-made general here; tell us how it went in an
+made general here. If anything goes wrong, or you would like a hand before
+you begin, write to Rastin Mehr, Anahita's founder, at
+[@rastin@banu.io](https://banu.io/@rastin) on the fediverse, or open an
 [issue](https://github.com/anahitasocial/anahita-recipes/issues).
 
 ## Contents
