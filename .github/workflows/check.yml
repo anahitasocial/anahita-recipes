@@ -1,0 +1,13 @@
+# Runs ./check.sh on every push and pull request: every recipe builds, names
+# only settings that exist, and shares what it shares unchanged.
+name: check
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Every recipe
+        run: ./check.sh
