@@ -88,7 +88,9 @@ committed.
    reached through SSH, never over the internet.
 6. **`make apply`.** The first time takes some minutes, while the images
    are fetched. `make status` shows the pods: every one `Running`, and
-   `migration-job` and `garage-init` `Completed`.
+   `migration-job` and `garage-init` `Completed`, but for `web-shell`,
+   which waits, failing to start, until there is a web app to send: the
+   next step.
 7. **`make web`.** Builds the web app with your site's name and puts it
    live. Your site is now at `https://<domain>`.
 8. **Sign in.** The first super administrator, your email, is sent a link

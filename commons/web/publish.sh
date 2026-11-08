@@ -31,6 +31,9 @@ CONFIG=$(mktemp)
 trap 'rm -f "$CONFIG"' EXIT
 printf '[default]\ns3 =\n  addressing_style = path\n' > "$CONFIG"
 export AWS_CONFIG_FILE="$CONFIG" AWS_SHARED_CREDENTIALS_FILE=/dev/null AWS_DEFAULT_REGION=garage
+# Checksums only where S3 asks for them: the AWS CLI's newer ones, added to
+# every upload, are not understood by every store.
+export AWS_REQUEST_CHECKSUM_CALCULATION=when_required AWS_RESPONSE_CHECKSUM_VALIDATION=when_required
 AWS_ACCESS_KEY_ID=$(value STORAGE_ACCESS_KEY "$SITE/k8s/secrets.env")
 AWS_SECRET_ACCESS_KEY=$(value STORAGE_SECRET_KEY "$SITE/k8s/secrets.env")
 export AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY
