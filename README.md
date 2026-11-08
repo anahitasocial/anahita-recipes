@@ -20,11 +20,11 @@ what each will be.
 
 | Recipe | For | Like | State |
 | --- | --- | --- | --- |
-| [`commons`](#commons) | Everything Anahita does | Mastodon and Pixelfed | Being written |
-| [`coffeehouse`](#coffeehouse) | Short posts and conversation | Mastodon, Threads | Planned |
-| [`journal`](#journal) | Articles first | Medium | Planned |
+| [`commons`](#commons) | Everything Anahita does | Mastodon and Pixelfed, but more | Being written |
+| [`coffeehouse`](#coffeehouse) | Short posts and conversation | Mastodon, Bluesky | Planned |
+| [`journal`](#journal) | Articles first | WordPress, Medium | Planned |
 | [`theatre`](#theatre) | Video first | YouTube, PeerTube | Planned |
-| [`gathering`](#gathering) | Events first | Eventbrite | Planned |
+| [`gathering`](#gathering) | Events first | Meetup, Luma | Planned |
 | [`php-migration`](#php-migration) | Moving from Anahita PHP | | Planned |
 
 Whether a site is open to anybody or for its members only, as a school or a
