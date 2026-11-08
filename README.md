@@ -114,6 +114,7 @@ commons/
   README.md             who it is for, what it decides, and the steps from
                         an empty server to the first person signed in
   Makefile              every task one word; `make` lists them
+  scripts/              what make init and make server run
   k8s/
     kustomization.yml   Anahita's services at a version, and your site's names
     config.env          the settings, each with a line saying why
