@@ -72,13 +72,15 @@ run them. Nothing is sold: there are no tickets.
 ### php-migration
 
 Moving a site from Anahita PHP to today's Anahita, the way banu.io was
-moved. It is not a kind of site but a way into one: it ends with your site
-on one of the recipes above. Each step is one `make` task, and each that
-changes anything first shows what it would change, with nothing changed:
+moved. It holds the move alone. First make the new site with
+[`commons`](#commons), following its README as far as `make apply`; then
+this recipe moves the old site into it. Each step is one `make` task, and
+each that changes anything first shows what it would change, with nothing
+changed:
 
 1. Archive the old site, and prove the archive opens.
-2. Copy its files to a new bucket.
-3. Upgrade the database, on a copy first.
+2. Copy its files into the new site's.
+3. Load its database into the new site's and upgrade it, on a copy first.
 4. Check that people, posts and files are all there.
 5. Retire the old site.
 
