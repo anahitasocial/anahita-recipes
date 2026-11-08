@@ -1,0 +1,127 @@
+# Anahita Recipes
+
+A site ready to run, for each purpose.
+
+[Anahita](https://www.anahita.io) is an open-source social network for the
+fediverse, built as a set of small services. The hardest part of running it
+is not Anahita: it is Kubernetes and the knowledge of running servers around
+it. A recipe writes that knowledge down once. Each is a directory you copy:
+the configuration chosen and explained, a Makefile in which every task is
+one word (`make apply`, `make status`, `make logs`), and the steps from an
+empty server to the first person signed in.
+
+What a site does not need is not run, and what it needs more of is given
+more. That is what small services are for.
+
+**The recipes are being written.** None is ready to use yet; this page says
+what each will be.
+
+## The recipes
+
+| Recipe | For | Like | State |
+| --- | --- | --- | --- |
+| [`commons`](#commons) | Everything Anahita does | Mastodon and Pixelfed | Being written |
+| [`coffeehouse`](#coffeehouse) | Short posts and conversation | Mastodon, Threads | Planned |
+| [`journal`](#journal) | Articles first | Medium | Planned |
+| [`theatre`](#theatre) | Video first | YouTube, PeerTube | Planned |
+| [`gathering`](#gathering) | Events first | Eventbrite | Planned |
+| [`php-migration`](#php-migration) | Moving from Anahita PHP | | Planned |
+
+Whether a site is open to anybody or for its members only, as a school or a
+company may need, is a choice inside any recipe.
+
+### commons
+
+Everything, for everyone. Notes, photos, video and articles; groups and
+their followers; events and their hosts; locations on posts; and federation
+with both ActivityPub and AT Protocol, so that people on Mastodon, Pixelfed
+and Bluesky can follow and reply. It is Anahita as a whole, and the one to
+begin with if you are not sure which you need. A commons is what a
+community holds together and nobody owns.
+
+### coffeehouse
+
+Short posts and the conversation around them. Notes and photos come first;
+articles, events and websites are turned off, and video is kept short. For
+a town, a club or a field that wants to talk, not publish. Named after the
+coffeehouses of the seventeenth and eighteenth centuries, called penny
+universities: for the price of a coffee, anybody could sit down and argue
+about the news.
+
+### journal
+
+Articles first, for newsrooms, research groups, libraries and writers. The
+home page is a list of article cards with their covers, and short notes sit
+beside them for what does not need an article. A journal is written over
+time and kept, and old and useful articles are found as easily as new ones.
+
+### theatre
+
+Video first, for a school's lectures, a festival or a channel of one's own
+that nobody else controls. The home page is a grid of thumbnails, uploads
+may be larger, and the service that prepares video is given more of the
+server.
+
+### gathering
+
+What is on, first. Events lead, and groups are their organisers: for a
+library's programme, a community centre or a network of local chapters.
+People see what is coming, say they are going and follow the groups that
+run them. Nothing is sold: there are no tickets.
+
+### php-migration
+
+Moving a site from Anahita PHP to today's Anahita, the way banu.io was
+moved. It is not a kind of site but a way into one: it ends with your site
+on one of the recipes above. Each step is one `make` task, and each that
+changes anything first shows what it would change, with nothing changed:
+
+1. Archive the old site, and prove the archive opens.
+2. Copy its files to a new bucket.
+3. Upgrade the database, on a copy first.
+4. Check that people, posts and files are all there.
+5. Retire the old site.
+
+## What a recipe is made of
+
+Every recipe is laid out the same way, so that once you know one, you know
+where to look in all of them:
+
+```
+commons/
+  README.md             who it is for, what it decides, and the steps from
+                        an empty server to the first person signed in
+  Makefile              every task one word; `make` lists them
+  k8s/
+    kustomization.yml   Anahita's services at a version, and your site's names
+    config.env          the settings, each with a line saying why
+    secrets.env.example
+    patches/            the services it leaves out, and how to put one back
+  deploy/               the server and its DNS: aws/, ovhcloud/, hetzner/
+  web/                  the theme, and the scripts that build and publish it
+```
+
+A recipe is a start, not a lock: once copied, its settings are yours to
+change.
+
+## Where to run one
+
+One server with 2 CPUs, 4 GB of memory and 40 GB of disk is enough to
+begin. Recipes are written for Amazon Web Services, OVHcloud and Hetzner;
+[docs/providers.md](docs/providers.md) says which have been tried, and lists
+other providers in Canada and Europe that should work. If you try one, tell
+us how it went in an
+[issue](https://github.com/anahitasocial/anahita-recipes/issues).
+
+## More
+
+| To learn | Read |
+| --- | --- |
+| What Anahita is | [www.anahita.io](https://www.anahita.io) |
+| The services, their settings and the API | [anahita-services](https://github.com/anahitasocial/anahita-services) |
+| The web app | [anahita-web](https://github.com/anahitasocial/anahita-web) |
+| How the recipes are planned | [recipes.md](https://github.com/anahitasocial/anahita-services/blob/main/docs/plans/recipes.md) |
+
+Anahita was founded by Rastin Mehr, and is maintained and developed by
+[rmd Studio](https://www.rmdstudio.com). The recipes are under the MIT
+licence ([LICENSE](LICENSE)).
