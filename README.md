@@ -25,7 +25,7 @@ what each will be.
 | [`journal`](#journal) | Articles first | WordPress, Medium | Planned |
 | [`theatre`](#theatre) | Video first | YouTube, PeerTube | Planned |
 | [`gathering`](#gathering) | Events first | Meetup, Luma | Planned |
-| [`php-migration`](#php-migration) | Moving from Anahita PHP | | Planned |
+| [`php-migration`](#php-migration) | Moving from Anahita PHP | | Being written |
 
 Whether a site is open to anybody or for its members only, as a school or a
 company may need, is a choice inside any recipe.
@@ -79,8 +79,9 @@ each that changes anything first shows what it would change, with nothing
 changed:
 
 1. Archive the old site, and prove the archive opens.
-2. Copy its files into the new site's.
-3. Load its database into the new site's and upgrade it, on a copy first.
+2. Load its database into the new site's, and upgrade it. The old site is
+   only read, so this can be done again from the archive until it is right.
+3. Copy its files into the new site's.
 4. Check that people, posts and files are all there.
 5. Retire the old site.
 

@@ -54,4 +54,11 @@ for recipe in */; do
   fi
 done
 
+# The migration's script compiles.
+for script in */migration/*.py; do
+  [ -f "$script" ] || continue
+  python3 -m py_compile "$script" 2>/dev/null && echo "$script compiles" || fail "$script does not compile"
+done
+find . -name __pycache__ -type d -prune -exec rm -r {} +
+
 [ "$failed" = 0 ] && echo "Every recipe checked." || { echo "Some checks failed."; exit 1; }
