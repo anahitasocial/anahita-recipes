@@ -18,7 +18,7 @@ KUBECTL = kubectl --kubeconfig $(KUBECONFIG_FILE) --context $(DOMAIN)
 export K3S_VERSION CERT_MANAGER_VERSION ANAHITA_VERSION TUNNEL_PORT
 
 .DEFAULT_GOAL := help
-.PHONY: help init site server tunnel tunnel-open status pods apply restart logs backup mail-off mail-on upgrade
+.PHONY: help init site server tunnel tunnel-open status pods apply build publish web restart logs backup mail-off mail-on upgrade
 
 ## help: this list
 help:
@@ -69,6 +69,17 @@ apply: tunnel-open
 	  $(KUBECTL) -n anahita delete job $$job --ignore-not-found; \
 	done
 	$(KUBECTL) apply -k k8s
+
+## build: builds the web app into web/build/, from anahita-web at REF (main unless said)
+build: site
+	web/build.sh $(REF)
+
+## publish: puts web/build/ live, and starts web-shell again
+publish: tunnel-open
+	web/publish.sh $(KUBECONFIG_FILE) $(DOMAIN)
+
+## web: build, then publish
+web: build publish
 
 ## restart: starts a service again, SERVICE=web-shell for example
 restart: tunnel-open
