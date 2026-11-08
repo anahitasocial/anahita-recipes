@@ -14,6 +14,8 @@ which should work but nobody has tried yet.
 | Access | SSH with a key; Kubernetes is reached through `make tunnel`, never opened to the internet |
 
 Files are kept in Garage on the same server, so no other account is needed.
+A provider's S3-compatible store can take its place, Cloudflare's R2 among
+them; Cloudflare rents no servers to run a recipe on.
 
 ## Tried, and next
 
@@ -23,8 +25,10 @@ Files are kept in Garage on the same server, so no other account is needed.
 | OVHcloud | France | Beauharnois, Quebec; also Europe | Not tried yet |
 | Hetzner | Germany | Falkenstein, Nuremberg, Helsinki | Not tried yet |
 
-OVHcloud and Hetzner are widely used by Mastodon servers, and both rent a
-server to anybody with a card, with an API to make one. **We have not run
+Hetzner, OVHcloud, netcup and DigitalOcean are among the hosts fediverse
+servers run on most, in [FediDB's statistics](https://fedidb.com/stats).
+OVHcloud and Hetzner both rent a server to anybody with a card, with an API
+to make one. **We have not run
 Anahita on either yet.** If you do, tell us how it went, what worked and
 what did not, in an issue on
 [anahita-recipes](https://github.com/anahitasocial/anahita-recipes/issues).
