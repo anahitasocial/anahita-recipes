@@ -82,6 +82,26 @@ changes anything first shows what it would change, with nothing changed:
 4. Check that people, posts and files are all there.
 5. Retire the old site.
 
+A site that has run for years carries what nobody needs any more. The
+recipe comes with examples of thinning it, from what was done for banu.io,
+to change for your own site. Each, like the steps above, first counts what
+it would change, and with `-apply` keeps a copy of everything it removes
+before removing it:
+
+1. **Inactive accounts:** the people who have not signed in since a date,
+   and wrote nothing, removed with everything they own; a list of those to
+   keep whatever their last visit.
+2. **Old posts:** notes, replies, articles or topics older than a date,
+   removed with their threads; photos kept, whatever their age.
+3. **Posts with nobody behind them:** those whose author was deleted long
+   ago, and so are shown to nobody.
+4. **Photos moved to another profile:** a person's photos out of a group,
+   or from one profile to another, with their files, which are kept under
+   their owner's folder and must move too.
+5. **Groups:** those nobody posts in, removed with what is in them, once
+   whatever is to be kept is moved out.
+6. **Files nothing names:** removed after the rest, by the nightly sweep.
+
 ## What a recipe is made of
 
 Every recipe is laid out the same way, so that once you know one, you know
