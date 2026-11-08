@@ -1,0 +1,64 @@
+# web-shell sends the web app (anahita-services' docs/web-shell.md). Its
+# image has no app in it: each site builds its own, with its theme, and
+# `make web` puts each build in Garage, in web/<build>/, and its name in
+# web/current. Before web-shell starts, fetch-web copies that build to where
+# web-shell reads it, so a new build is a restart away, and is never sent
+# half-uploaded.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-shell
+spec:
+  template:
+    spec:
+      initContainers:
+        - name: fetch-web
+          image: amazon/aws-cli:2.37.10
+          command: ["bash", "-c"]
+          args:
+            - |
+              set -euo pipefail
+              s3() { aws --endpoint-url http://garage:3900 s3 "$@"; }
+              build=$(s3 cp "s3://$STORAGE_BUCKET/web/current" - | tr -d '[:space:]')
+              test -n "$build"
+              s3 sync "s3://$STORAGE_BUCKET/web/$build/" /web/ --only-show-errors --no-progress
+              test -f /web/index.html
+              echo "the web app, build $build"
+          env:
+            - name: STORAGE_BUCKET
+              valueFrom:
+                configMapKeyRef:
+                  name: anahita-config
+                  key: STORAGE_BUCKET
+            - name: AWS_DEFAULT_REGION
+              valueFrom:
+                configMapKeyRef:
+                  name: anahita-config
+                  key: STORAGE_REGION
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: anahita-secrets
+                  key: STORAGE_ACCESS_KEY
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: anahita-secrets
+                  key: STORAGE_SECRET_KEY
+          resources:
+            requests:
+              cpu: 25m
+              memory: 64Mi
+          volumeMounts:
+            - name: web
+              mountPath: /web
+      containers:
+        - name: web-shell
+          volumeMounts:
+            - name: web
+              mountPath: /app/web
+              readOnly: true
+      volumes:
+        - name: web
+          emptyDir:
+            sizeLimit: 200Mi

@@ -1,0 +1,15 @@
+# video-worker reserves little CPU on a server of 2: it is idle almost
+# always, and while it converts a video it uses both cores whatever it
+# reserves. Reserving more, as the base does, leaves a restart no room.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: video-worker
+spec:
+  template:
+    spec:
+      containers:
+        - name: video-worker
+          resources:
+            requests:
+              cpu: 100m
