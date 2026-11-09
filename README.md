@@ -42,8 +42,9 @@ community holds together and nobody owns.
 
 ### coffeehouse
 
-Short posts and the conversation around them. Notes and photos come first;
-articles, events and websites are turned off, and video is kept short. For
+Short posts and the conversation around them: notes and photos, and
+nothing else. Articles, topics, events and websites are turned off, and
+there are no videos, GIFs or sound, so the video services are not run. For
 a town, a club or a field that wants to talk, not publish. Named after the
 coffeehouses of the seventeenth and eighteenth centuries, called penny
 universities: for the price of a coffee, anybody could sit down and argue
