@@ -156,8 +156,8 @@ keep the files in place of Garage, on a new site, before anybody posts:
    `STORAGE_SECRET_KEY`.
 4. In `k8s/web-shell.yml` and `web/publish.sh`, the store's address in place
    of Garage's.
-5. Let the web app's address `PUT` to the bucket (CORS), where videos are
-   sent.
+5. Let the web app's address `PUT` to the bucket (CORS), where videos and
+   sounds are sent.
 
 anahita-services' `docs/configuration.md`, under "Storage", describes each
 setting.
