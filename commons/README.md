@@ -41,6 +41,21 @@ It runs every service Anahita has, with MySQL, Redis, RabbitMQ and Garage
 on the same server, at the version named in
 [k8s/kustomization.yml](k8s/kustomization.yml).
 
+![One server running k3s. Traefik takes every request and hands it to the
+gateway, or to web-shell for the web app. Thirteen services always run,
+with three shared over gRPC; eight others, dashed, run only if the site
+offers what they bring. MySQL, Redis, RabbitMQ and Garage keep the data,
+and four jobs run by the clock or once. Outside: a mail provider, an object
+store if not Garage, and DNS.](images/what-runs.svg)
+
+Anahita is small services, each doing one thing, so a site runs only what
+it offers. The solid ones are the site itself. Each dashed one brings one
+thing a site can go without, and is left out by a recipe that does not
+offer it: no videos, no Bluesky, no websites' feeds. `commons` offers
+everything, so it runs them all. Turning off what goes with a service in
+the web app, its buttons and pages, comes with anahita-services' roadmap
+row 139.
+
 ## Three things to decide first
 
 Before the first person joins:
