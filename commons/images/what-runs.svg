@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 800" width="960" height="800" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" role="img" aria-labelledby="title desc">
   <title id="title">What runs on a commons server</title>
-  <desc id="desc">One server running k3s. Traefik takes every request, from client-side apps and from other servers, and hands it to the gateway, or to web-shell for the web app. The gateway routes the API to thirteen services that always run, with three shared services over gRPC. Eight others, drawn dashed, run only if the site offers what they bring: videos and sound, the fediverse, Bluesky and the Atmosphere, websites' feeds, cards for links, who to follow, downloads and imports, and web-shell. MySQL, Redis, RabbitMQ and Garage keep the data; four jobs run by the clock or once. Outside the server: a mail provider, an object store if not Garage, and DNS.</desc>
+  <desc id="desc">One server running k3s. Traefik, with certificates from cert-manager, takes every request, from client-side apps and from other servers, and hands it to the gateway, or to web-shell for the web app. The gateway routes the API to thirteen services that always run, with three shared services over gRPC. Eight others, drawn dashed, run only if the site offers what they bring: videos and sound, the fediverse, Bluesky and the Atmosphere, websites' feeds, cards for links, who to follow, downloads and imports, and web-shell. MySQL, Redis, RabbitMQ and Garage keep the data; four jobs run by the clock or once. Outside the server: a mail provider, an object store if not Garage, and DNS.</desc>
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M0 0 L10 5 L0 10 z" fill="#5f6368"/>
@@ -26,10 +26,10 @@
   <g stroke="#5f6368" stroke-width="1.5" fill="none" marker-end="url(#arrow)">
     <path d="M220 76 L385 150"/>
     <path d="M740 76 L425 150"/>
-    <path d="M320 174 L282 174"/>
-    <path d="M490 174 L528 174"/>
-    <path d="M580 198 L520 232"/>
-    <path d="M680 198 L740 232"/>
+    <path d="M300 174 L264 174"/>
+    <path d="M510 174 L546 174"/>
+    <path d="M598 198 L520 232"/>
+    <path d="M698 198 L758 232"/>
     <path d="M160 688 L160 716"/>
     <path d="M480 688 L480 716"/>
     <path d="M800 688 L800 716"/>
@@ -37,15 +37,15 @@
 
   <!-- The front door. -->
   <g font-size="14" fill="#202124" text-anchor="middle">
-    <rect x="62" y="150" width="216" height="48" rx="10" fill="#fff" stroke="#202124" stroke-width="1.5" stroke-dasharray="5 4"/>
-    <text x="170" y="170">web-shell</text>
-    <text x="170" y="187" font-size="11" fill="#5f6368">the web app, and links shared</text>
-    <rect x="322" y="150" width="166" height="48" rx="10" fill="#fff" stroke="#202124" stroke-width="1.5"/>
+    <rect x="44" y="150" width="216" height="48" rx="10" fill="#fff" stroke="#202124" stroke-width="1.5" stroke-dasharray="5 4"/>
+    <text x="152" y="170">web-shell</text>
+    <text x="152" y="187" font-size="11" fill="#5f6368">the web app, and links shared</text>
+    <rect x="300" y="150" width="210" height="48" rx="10" fill="#fff" stroke="#202124" stroke-width="1.5"/>
     <text x="405" y="170">Traefik</text>
-    <text x="405" y="187" font-size="11" fill="#5f6368">HTTPS and certificates</text>
-    <rect x="532" y="150" width="200" height="48" rx="10" fill="#fff" stroke="#202124" stroke-width="1.5"/>
-    <text x="632" y="170">gateway</text>
-    <text x="632" y="187" font-size="11" fill="#5f6368">nginx: routes, checks sign-ins</text>
+    <text x="405" y="187" font-size="10.5" fill="#5f6368">HTTPS, cert-manager's certificates</text>
+    <rect x="550" y="150" width="200" height="48" rx="10" fill="#fff" stroke="#202124" stroke-width="1.5"/>
+    <text x="650" y="170">gateway</text>
+    <text x="650" y="187" font-size="11" fill="#5f6368">nginx: routes, checks sign-ins</text>
   </g>
 
   <!-- Always run. -->
