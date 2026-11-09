@@ -2,7 +2,7 @@
 #
 # anahita-services' manifests and images, both at the version in ref= and
 # newTag below, the same on every line; an upgrade changes all of them at
-# once (`make upgrade VERSION=`). Fetched over HTTPS from GitHub: nothing to
+# once (`make upgrade`). Fetched over HTTPS from GitHub: nothing to
 # check out, and no key needed.
 #
 # `make init` puts your domain in place of example.org, in every file here.

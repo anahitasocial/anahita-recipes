@@ -103,11 +103,20 @@ mail-off: tunnel-open
 mail-on: tunnel-open
 	$(KUBECTL) -n anahita scale deployment mail-grpc-service --replicas=1
 
-## upgrade: names another version of Anahita, VERSION=v1.0.20 for example; then make apply
+# The version follows the word upgrade, as in make upgrade v1.2.4: it is
+# not a target of its own. VERSION= works too.
+ifeq (upgrade,$(firstword $(MAKECMDGOALS)))
+ifneq (,$(word 2,$(MAKECMDGOALS)))
+VERSION := $(word 2,$(MAKECMDGOALS))
+$(eval $(VERSION):;@:)
+endif
+endif
+
+## upgrade: names another version of Anahita, as in make upgrade v1.2.4; then make apply
 # Read what the version needs first, in anahita-services' CHANGELOG.md.
 upgrade:
-	@test -n "$(VERSION)" || { echo "Name it: make upgrade VERSION=v1.0.20 (now $(ANAHITA_VERSION))"; exit 1; }
-	@echo "$(VERSION)" | grep -qE '^v[0-9]+\.[0-9]+\.[0-9]+$$' || { echo "A version looks like v1.0.20."; exit 1; }
+	@test -n "$(VERSION)" || { echo "Name it: make upgrade v1.2.4 (now $(ANAHITA_VERSION))"; exit 1; }
+	@echo "$(VERSION)" | grep -qE '^v[0-9]+\.[0-9]+\.[0-9]+$$' || { echo "A version looks like v1.2.4."; exit 1; }
 	perl -pi -e 's/\Q$(ANAHITA_VERSION)\E/$(VERSION)/g' k8s/kustomization.yml
 	@echo "k8s/kustomization.yml names $(VERSION). Read what it needs:"
 	@echo "  https://github.com/anahitasocial/anahita-services/blob/$(VERSION)/CHANGELOG.md"

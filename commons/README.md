@@ -120,7 +120,7 @@ A logo of your own goes in `web/brand/` (`logo-512.png`, and the others
 ## Upgrading
 
 ```sh
-make upgrade VERSION=v1.0.20
+make upgrade v1.2.4
 make apply
 ```
 
