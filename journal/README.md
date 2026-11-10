@@ -1,9 +1,11 @@
 # journal
 
-Articles first, for newsrooms, research groups, libraries and writers:
-long writing with a title and a cover, notes beside it for what does not
-need an article, and photos. No topics, events or websites, and no videos,
-GIFs or sound. With federation on ActivityPub and AT Protocol, so that
+Articles first, for writers: long writing with a title and a cover, notes
+beside it for what does not need an article, and photos. Each person
+writes under their own name, as on Medium or WordPress.com; a newsroom or
+a research group that publishes together, in groups, begins with
+[`commons`](../commons) instead. No groups, topics, events or websites,
+and no videos, GIFs or sound. With federation on ActivityPub and AT Protocol, so that
 people on Mastodon, Pixelfed, Bluesky and the rest of the Atmosphere can
 follow and reply. A journal is written over time and kept, and old and
 useful articles are found as easily as new ones.
@@ -38,7 +40,7 @@ place.
 
 | Setting | journal chooses | Why |
 | --- | --- | --- |
-| `instance.json` | People and groups; notes, articles and photos | What a journal is for. Topics, events and websites are in no menu, composer or tab, and the services refuse them |
+| `instance.json` | People; notes, articles and photos | What a journal is for, as on Medium or WordPress.com: writers, not groups. Groups, topics, events and websites are in no menu, composer or tab, and the services refuse them |
 | `REGISTRATION_MODE` | `approval` | Anybody may ask to join, and an administrator says yes, so that a new site is not filled by strangers before its rules are written |
 | `SITE_READ_ACCESS` | `public` | What is public may be read by anybody, as on Mastodon |
 | `FEDERATION_PROTOCOLS` | `activitypub,atproto` | Both networks. Each profile still chooses whether it federates |
@@ -71,14 +73,14 @@ setting on.
 | --- | --- |
 | `web-shell` | Serves the web app, each page with its own title and picture, so that a shared link shows as itself. |
 | `auth-service` | Signing in and signing up, and the accounts people sign in with. |
-| `actor-service` | Every kind of profile it offers: people and groups. |
+| `actor-service` | Every kind of profile it offers: people. |
 | `text-service` | Notes and articles, and the replies to any post. |
 | `photo-service` | Photo posts. |
 | `feed-service` | The chronological feed, reposts, and the custom feeds people make. |
 | `socialgraph-service` | Who follows, blocks, mutes and subscribes to whom. |
 | `like-service` | Likes. |
 | `notification-service` | Notifications in the app. |
-| `search-service` | Search for people, groups, posts and shared feeds. |
+| `search-service` | Search for people, posts and shared feeds. |
 | `hashtag-service` | Hashtags. |
 | `location-service` | The locations posts are tagged with, and finding them on a map. |
 | `identity-image-service` | Profile and cover photos, made afresh at each size. |
