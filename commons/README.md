@@ -56,6 +56,39 @@ everything, so it runs them all. What a site offers is said in one file,
 `instance.json`, and the web app and the services follow it: see
 `coffeehouse`, and anahita-services' `docs/instance-features.md`.
 
+<!-- what-runs:start -->
+
+**What each service does,** of those it runs:
+
+| Service | What it does |
+| --- | --- |
+| `web-shell` | Serves the web app, each page with its own title and picture, so that a shared link shows as itself. |
+| `auth-service` | Signing in and signing up, and the accounts people sign in with. |
+| `actor-service` | Every kind of profile: people, groups and events, and the profiles of websites. |
+| `text-service` | Notes, articles and topics, and the replies to any post. |
+| `photo-service` | Photo posts. |
+| `feed-service` | The chronological feed, reposts, and the custom feeds people make. |
+| `socialgraph-service` | Who follows, blocks, mutes and subscribes to whom. |
+| `like-service` | Likes. |
+| `notification-service` | Notifications in the app. |
+| `search-service` | Search for people, groups, events, posts and shared feeds. |
+| `hashtag-service` | Hashtags. |
+| `location-service` | The locations posts are tagged with, and finding them on a map. |
+| `identity-image-service` | Profile and cover photos, made afresh at each size. |
+| `abuse-report-service` | Reports of people and posts, and the cases administrators decide. |
+| `graph-grpc-service` | The graph every other service reads: profiles and posts are its nodes, and the ties between them its edges. |
+| `file-grpc-service` | Files, in Garage or any S3-compatible store. |
+| `mail-grpc-service` | Email, over SMTP. |
+| `video-service`, `video-worker` | Video, GIF and audio posts; video-worker makes each ready for every screen. |
+| `activitypub-service` | Makes the site a server of the fediverse, for the people who choose to be found there. |
+| `atproto-service` | Bluesky and the rest of the Atmosphere: following profiles there, and posting there for whoever connects their own account. |
+| `syndication-service`, `syndication-worker` | Following a website's feed like a profile; syndication-worker reads every feed and posts what is new. |
+| `link-preview-service` | The card under a note that links to a page: its title and picture. |
+| `recommendation-service` | Recommendations of who to follow. |
+| `import-export-service`, `import-export-worker` | A copy of one's own data to download, and a social graph brought in from elsewhere; import-export-worker does each. |
+
+<!-- what-runs:end -->
+
 ## Three things to decide first
 
 Before the first person joins:
