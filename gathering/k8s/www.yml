@@ -1,0 +1,38 @@
+# www.example.org, sent on to example.org with the same path, so that a link
+# with www in it arrives, and search engines know one address. An Ingress
+# and a certificate of its own; the backend named is never reached.
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: www-to-apex
+spec:
+  redirectRegex:
+    regex: ^https?://www\.example\.org/(.*)
+    replacement: https://example.org/${1}
+    permanent: true
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: www
+  annotations:
+    cert-manager.io/issuer: letsencrypt
+    # <namespace>-<name>@kubernetescrd, as Traefik names a Middleware.
+    traefik.ingress.kubernetes.io/router.middlewares: anahita-www-to-apex@kubernetescrd
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - www.example.org
+      secretName: www-tls
+  rules:
+    - host: www.example.org
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: web-shell
+                port:
+                  name: http

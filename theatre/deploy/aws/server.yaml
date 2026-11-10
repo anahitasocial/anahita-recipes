@@ -1,0 +1,154 @@
+# The site's server on AWS: one Ubuntu server, its firewall, an address that
+# stays the same, daily snapshots of its disk, and, given a Route 53 zone,
+# the site's five DNS records. deploy/aws/server.sh deploys it.
+#
+# k3s is not installed here: `make server` does that over SSH, the same at
+# every provider.
+AWSTemplateFormatVersion: '2010-09-09'
+Description: An Anahita site - one Ubuntu server for k3s
+
+Parameters:
+  Name:
+    Type: String
+    Description: A name for what is made, from the domain, e.g. social-example-ca
+  DomainName:
+    Type: String
+  InstanceType:
+    Type: String
+    Default: t4g.medium
+    Description: 2 vCPU and 4 GB, ARM. A resize is a stop, this changed, and a start
+  ImageId:
+    Type: AWS::EC2::Image::Id
+    Description: Ubuntu 24.04 for arm64, fixed at the first deploy so that a later one never replaces the server
+  VolumeSize:
+    Type: Number
+    Default: 40
+  VpcId:
+    Type: AWS::EC2::VPC::Id
+  KeyName:
+    Type: AWS::EC2::KeyPair::KeyName
+    Description: The SSH key to sign in with, as the user ubuntu
+  SshFrom:
+    Type: String
+    Default: 0.0.0.0/0
+    Description: Where SSH may come from. Your own address, as a.b.c.d/32, is safer
+  HostedZoneId:
+    Type: String
+    Default: ''
+    Description: The domain's zone in Route 53. Left empty, no DNS record is made
+
+Conditions:
+  WithDns: !Not [!Equals [!Ref HostedZoneId, '']]
+
+Resources:
+  Firewall:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: !Sub ${Name}-server
+      GroupDescription: SSH, and the web on 80 and 443, nothing else
+      VpcId: !Ref VpcId
+      SecurityGroupIngress:
+        - { IpProtocol: tcp, FromPort: 22, ToPort: 22, CidrIp: !Ref SshFrom, Description: "SSH: make server and make tunnel" }
+        - { IpProtocol: tcp, FromPort: 80, ToPort: 80, CidrIp: 0.0.0.0/0, Description: "HTTP: certificates and the redirect to HTTPS" }
+        - { IpProtocol: tcp, FromPort: 443, ToPort: 443, CidrIp: 0.0.0.0/0, Description: HTTPS }
+
+  Launch:
+    Type: AWS::EC2::LaunchTemplate
+    Properties:
+      LaunchTemplateName: !Sub ${Name}-server
+      LaunchTemplateData:
+        MetadataOptions:
+          HttpTokens: required
+          HttpEndpoint: enabled
+        TagSpecifications:
+          - ResourceType: volume
+            Tags:
+              - { Key: Snapshots, Value: !Sub '${Name}-daily' }
+
+  Server:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: !Ref InstanceType
+      ImageId: !Ref ImageId
+      KeyName: !Ref KeyName
+      SecurityGroupIds: [!GetAtt Firewall.GroupId]
+      LaunchTemplate:
+        LaunchTemplateId: !Ref Launch
+        Version: !GetAtt Launch.LatestVersionNumber
+      DisableApiTermination: true
+      CreditSpecification: { CPUCredits: unlimited }
+      BlockDeviceMappings:
+        - DeviceName: /dev/sda1
+          Ebs:
+            VolumeType: gp3
+            VolumeSize: !Ref VolumeSize
+            Encrypted: true
+            DeleteOnTermination: false
+      Tags:
+        - { Key: Name, Value: !Sub '${Name}-server' }
+
+  # The address stays the same across a stop and a resize.
+  Address:
+    Type: AWS::EC2::EIP
+    Properties:
+      Domain: vpc
+  AddressOfServer:
+    Type: AWS::EC2::EIPAssociation
+    Properties:
+      AllocationId: !GetAtt Address.AllocationId
+      InstanceId: !Ref Server
+
+  # A snapshot of the disk every day, kept seven days.
+  SnapshotRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal: { Service: dlm.amazonaws.com }
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - !Sub arn:${AWS::Partition}:iam::aws:policy/service-role/AWSDataLifecycleManagerServiceRole
+  Snapshots:
+    Type: AWS::DLM::LifecyclePolicy
+    Properties:
+      Description: !Sub '${Name} server disk daily kept seven days'
+      State: ENABLED
+      ExecutionRoleArn: !GetAtt SnapshotRole.Arn
+      PolicyDetails:
+        ResourceTypes: [VOLUME]
+        TargetTags:
+          - { Key: Snapshots, Value: !Sub '${Name}-daily' }
+        Schedules:
+          - Name: daily
+            CreateRule: { Interval: 24, IntervalUnit: HOURS, Times: ['09:00'] }
+            RetainRule: { Count: 7 }
+            CopyTags: true
+
+  # The five names, all to the one address (k8s/ingress.yml, www.yml).
+  RecordApex:
+    Type: AWS::Route53::RecordSet
+    Condition: WithDns
+    Properties: { HostedZoneId: !Ref HostedZoneId, Name: !Ref DomainName, Type: A, TTL: '300', ResourceRecords: [!Ref Address] }
+  RecordWww:
+    Type: AWS::Route53::RecordSet
+    Condition: WithDns
+    Properties: { HostedZoneId: !Ref HostedZoneId, Name: !Sub 'www.${DomainName}', Type: A, TTL: '300', ResourceRecords: [!Ref Address] }
+  RecordApi:
+    Type: AWS::Route53::RecordSet
+    Condition: WithDns
+    Properties: { HostedZoneId: !Ref HostedZoneId, Name: !Sub 'api.${DomainName}', Type: A, TTL: '300', ResourceRecords: [!Ref Address] }
+  RecordAuth:
+    Type: AWS::Route53::RecordSet
+    Condition: WithDns
+    Properties: { HostedZoneId: !Ref HostedZoneId, Name: !Sub 'auth.${DomainName}', Type: A, TTL: '300', ResourceRecords: [!Ref Address] }
+  RecordFiles:
+    Type: AWS::Route53::RecordSet
+    Condition: WithDns
+    Properties: { HostedZoneId: !Ref HostedZoneId, Name: !Sub 'files.${DomainName}', Type: A, TTL: '300', ResourceRecords: [!Ref Address] }
+
+Outputs:
+  Address:
+    Description: The server's address, for make init
+    Value: !Ref Address

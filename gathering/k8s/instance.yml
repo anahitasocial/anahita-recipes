@@ -1,0 +1,22 @@
+# What a gathering offers, instance.json, read by graph-grpc-service from
+# its features directory: people, groups and events; notes, photos and topics. Mounted over
+# the one file with subPath, so the image's other feature files stay
+# (anahita-services' docs/instance-features.md).
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: graph-grpc-service
+spec:
+  template:
+    spec:
+      containers:
+        - name: graph-grpc-service
+          volumeMounts:
+            - name: instance
+              mountPath: /app/defaults/actor_features/instance.json
+              subPath: instance.json
+              readOnly: true
+      volumes:
+        - name: instance
+          configMap:
+            name: anahita-instance

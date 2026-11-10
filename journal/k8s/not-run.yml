@@ -1,0 +1,31 @@
+# What a journal does not offer is not run: videos and sound and websites' feeds
+# (video-service, video-worker, syndication-service, syndication-worker). At no replicas, their Services
+# stay, so the gateway, which names them, starts as ever. To put one back,
+# take it out of here.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: video-service
+spec:
+  replicas: 0
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: video-worker
+spec:
+  replicas: 0
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: syndication-service
+spec:
+  replicas: 0
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: syndication-worker
+spec:
+  replicas: 0

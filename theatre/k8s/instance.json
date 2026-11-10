@@ -1,0 +1,6 @@
+[
+  {"service": "actor-service", "node_types": ["person", "group"]},
+  {"service": "text-service", "node_types": ["note"]},
+  {"service": "photo-service", "enabled": false},
+  {"service": "video-service", "node_types": ["video", "audio"]}
+]

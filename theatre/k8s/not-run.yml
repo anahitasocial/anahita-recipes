@@ -1,0 +1,17 @@
+# What a theatre does not offer is not run: websites' feeds
+# (syndication-service, syndication-worker). At no replicas, their Services
+# stay, so the gateway, which names them, starts as ever. To put one back,
+# take it out of here.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: syndication-service
+spec:
+  replicas: 0
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: syndication-worker
+spec:
+  replicas: 0

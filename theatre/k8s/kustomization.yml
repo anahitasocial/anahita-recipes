@@ -1,0 +1,153 @@
+# The theatre recipe: people and groups; notes, videos and sound, on one server running
+# k3s. What it offers is instance.json; what it does not
+# offer is not run (not-run.yml).
+#
+# anahita-services' manifests and images, both at the version in ref= and
+# newTag below, the same on every line; an upgrade changes all of them at
+# once (`make upgrade`). Fetched over HTTPS from GitHub: nothing to
+# check out, and no key needed.
+#
+# `make init` puts your domain in place of example.org, in every file here.
+# `make apply` applies it.
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: anahita
+
+resources:
+  - namespace.yml
+  - issuer.yml
+  - https.yml
+  - www.yml
+  - https://github.com/anahitasocial/anahita-services//k8s/base?ref=v1.2.6
+  # The web app, which the base leaves out, as each site builds its own:
+  # web-shell.yml says how the build reaches it.
+  - https://raw.githubusercontent.com/anahitasocial/anahita-services/v1.2.6/k8s/base/services/web-shell.yml
+
+# Everything on the one server: the database, the cache, the event bus and
+# the files (Garage), with a nightly backup of the database into the files.
+components:
+  - https://github.com/anahitasocial/anahita-services//k8s/components/traefik?ref=v1.2.6
+  - https://github.com/anahitasocial/anahita-services//k8s/components/mysql?ref=v1.2.6
+  - https://github.com/anahitasocial/anahita-services//k8s/components/mysql-backup?ref=v1.2.6
+  - https://github.com/anahitasocial/anahita-services//k8s/components/redis?ref=v1.2.6
+  - https://github.com/anahitasocial/anahita-services//k8s/components/rabbitmq?ref=v1.2.6
+  - https://github.com/anahitasocial/anahita-services//k8s/components/garage?ref=v1.2.6
+
+patches:
+  - path: ingress.yml
+  - path: web-shell.yml
+  - path: mysql.yml
+  - path: instance.yml
+  - path: not-run.yml
+
+configMapGenerator:
+  - name: anahita-config
+    behavior: merge
+    envs:
+      - config.env
+  - name: anahita-oauth-clients
+    files:
+      - oauth_seed_clients.json
+  - name: anahita-instance
+    files:
+      - instance.json
+
+secretGenerator:
+  - name: anahita-secrets
+    envs:
+      - secrets.env
+
+# Which build to run: one Birth release, from GitHub's registry, the same
+# version as ref= above.
+images:
+  - name: anahita/abuse-report-service
+    newName: ghcr.io/anahitasocial/abuse-report-service
+    newTag: v1.2.6
+  - name: anahita/activitypub-service
+    newName: ghcr.io/anahitasocial/activitypub-service
+    newTag: v1.2.6
+  - name: anahita/atproto-service
+    newName: ghcr.io/anahitasocial/atproto-service
+    newTag: v1.2.6
+  - name: anahita/actor-service
+    newName: ghcr.io/anahitasocial/actor-service
+    newTag: v1.2.6
+  - name: anahita/auth-service
+    newName: ghcr.io/anahitasocial/auth-service
+    newTag: v1.2.6
+  - name: anahita/feed-service
+    newName: ghcr.io/anahitasocial/feed-service
+    newTag: v1.2.6
+  - name: anahita/file-grpc-service
+    newName: ghcr.io/anahitasocial/file-grpc-service
+    newTag: v1.2.6
+  - name: anahita/graph-grpc-service
+    newName: ghcr.io/anahitasocial/graph-grpc-service
+    newTag: v1.2.6
+  - name: anahita/hashtag-service
+    newName: ghcr.io/anahitasocial/hashtag-service
+    newTag: v1.2.6
+  - name: anahita/identity-image-service
+    newName: ghcr.io/anahitasocial/identity-image-service
+    newTag: v1.2.6
+  - name: anahita/like-service
+    newName: ghcr.io/anahitasocial/like-service
+    newTag: v1.2.6
+  - name: anahita/link-preview-service
+    newName: ghcr.io/anahitasocial/link-preview-service
+    newTag: v1.2.6
+  - name: anahita/syndication-service
+    newName: ghcr.io/anahitasocial/syndication-service
+    newTag: v1.2.6
+  - name: anahita/syndication-worker
+    newName: ghcr.io/anahitasocial/syndication-worker
+    newTag: v1.2.6
+  - name: anahita/location-service
+    newName: ghcr.io/anahitasocial/location-service
+    newTag: v1.2.6
+  - name: anahita/mail-grpc-service
+    newName: ghcr.io/anahitasocial/mail-grpc-service
+    newTag: v1.2.6
+  - name: anahita/migration-job
+    newName: ghcr.io/anahitasocial/migration-job
+    newTag: v1.2.6
+  - name: anahita/web-shell
+    newName: ghcr.io/anahitasocial/web-shell
+    newTag: v1.2.6
+  - name: anahita/nginx
+    newName: ghcr.io/anahitasocial/gateway
+    newTag: v1.2.6
+  - name: anahita/notification-service
+    newName: ghcr.io/anahitasocial/notification-service
+    newTag: v1.2.6
+  - name: anahita/photo-service
+    newName: ghcr.io/anahitasocial/photo-service
+    newTag: v1.2.6
+  - name: anahita/video-service
+    newName: ghcr.io/anahitasocial/video-service
+    newTag: v1.2.6
+  - name: anahita/video-worker
+    newName: ghcr.io/anahitasocial/video-worker
+    newTag: v1.2.6
+  - name: anahita/import-export-service
+    newName: ghcr.io/anahitasocial/import-export-service
+    newTag: v1.2.6
+  - name: anahita/import-export-worker
+    newName: ghcr.io/anahitasocial/import-export-worker
+    newTag: v1.2.6
+  - name: anahita/recommendation-service
+    newName: ghcr.io/anahitasocial/recommendation-service
+    newTag: v1.2.6
+  - name: anahita/search-service
+    newName: ghcr.io/anahitasocial/search-service
+    newTag: v1.2.6
+  - name: anahita/socialgraph-service
+    newName: ghcr.io/anahitasocial/socialgraph-service
+    newTag: v1.2.6
+  - name: anahita/sweeper-job
+    newName: ghcr.io/anahitasocial/sweeper-job
+    newTag: v1.2.6
+  - name: anahita/text-service
+    newName: ghcr.io/anahitasocial/text-service
+    newTag: v1.2.6
