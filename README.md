@@ -1,5 +1,5 @@
 <img src="docs/images/ramen.svg" alt="A bowl of ramen" width="120" align="right">
-<img src="docs/images/anahita-logo.svg" alt="Anahita" width="120">
+<img src="docs/images/anahita-logo.svg" alt="Anahita" width="240">
 
 # Anahita Recipes
 
