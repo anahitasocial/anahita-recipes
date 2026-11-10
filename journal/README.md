@@ -6,9 +6,10 @@ writes under their own name, as on Medium or WordPress.com. Newsrooms
 and schools will have recipes of their own; until then, one that
 publishes together, in groups, can begin with [`commons`](../commons).
 No groups, topics, events or websites, and no videos, GIFs or sound. With
-federation on ActivityPub and AT Protocol, so that people on Mastodon, Pixelfed, Bluesky and the rest of the Atmosphere can
-follow and reply. A journal is written over time and kept, and old and
-useful articles are found as easily as new ones.
+federation on ActivityPub and AT Protocol, so that people on Mastodon,
+Pixelfed, Bluesky and the rest of the Atmosphere can follow and reply. A
+journal is written over time and kept, and old and useful articles are
+found as easily as new ones.
 
 **Not tried yet from start to finish.** It is `commons` with less in it,
 and `commons` comes from banu.io, but this recipe has not yet made a site
