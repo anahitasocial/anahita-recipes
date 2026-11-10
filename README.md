@@ -13,6 +13,19 @@ empty server to the first person signed in.
 What a site does not need is not run, and what it needs more of is given
 more. That is what small services are for.
 
+![Everything Anahita runs, on one server running k3s, as commons runs it.
+Thirteen services always run, with three shared over gRPC; eight others,
+dashed, run only if the site offers what they bring: videos and sound, the
+fediverse, Bluesky and the Atmosphere, websites' feeds, cards for links,
+who to follow, downloads and imports, and web-shell. MySQL, Redis,
+RabbitMQ and Garage keep the data.](commons/images/what-runs.svg)
+
+That is all of Anahita, as `commons` runs it. Each recipe offers part of
+it, says so in one file (`instance.json`), and does not run the dashed
+services it does not offer: its own README has its own diagram. A
+`coffeehouse`, for one, runs neither the video services nor websites'
+feeds.
+
 **`commons`, `coffeehouse` and `php-migration` are ready to try;** the others are planned.
 Nobody has tried them from start to finish yet: if you do, tell us how it
 went, in an [issue](https://github.com/anahitasocial/anahita-recipes/issues).
