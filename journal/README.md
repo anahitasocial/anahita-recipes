@@ -2,9 +2,10 @@
 
 Articles first, for writers: long writing with a title and a cover, notes
 beside it for what does not need an article, and photos. Each person
-writes under their own name, as on Medium or WordPress.com; a newsroom or
-a research group that publishes together, in groups, begins with
-[`commons`](../commons) instead. No groups, topics, events or websites,
+writes under their own name, as on Medium or WordPress.com. Newsrooms
+and schools will have recipes of their own; until then, one that
+publishes together, in groups, can begin with [`commons`](../commons).
+No groups, topics, events or websites,
 and no videos, GIFs or sound. With federation on ActivityPub and AT Protocol, so that
 people on Mastodon, Pixelfed, Bluesky and the rest of the Atmosphere can
 follow and reply. A journal is written over time and kept, and old and
