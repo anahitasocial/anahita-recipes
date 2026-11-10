@@ -1,3 +1,5 @@
+<img src="docs/images/ramen.svg" alt="A bowl of ramen" width="120">
+
 # Anahita Recipes
 
 A site ready to run, for each purpose.
@@ -34,16 +36,8 @@ Each recipe's README walks through it, and says what it chose and why.
 ## Only what your site needs
 
 Anahita is small services, each doing one thing. A recipe runs only what
-its site offers, and says what that is in one file, `instance.json`. Here
-is all of Anahita, as `commons` runs it; the dashed services are the ones a
-recipe can leave out.
-
-![Everything Anahita runs, on one server running k3s, as commons runs it.
-Thirteen services always run, with three shared over gRPC; eight others,
-dashed, run only if the site offers what they bring: videos and sound, the
-fediverse, Bluesky and the Atmosphere, websites' feeds, cards for links,
-who to follow, downloads and imports, and web-shell. MySQL, Redis,
-RabbitMQ and Garage keep the data.](commons/images/what-runs.svg)
+its site offers, and says what that is in one file, `instance.json`. Each
+recipe's README draws what it runs.
 
 ## Where to run one
 
