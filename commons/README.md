@@ -64,14 +64,14 @@ everything, so it runs them all. What a site offers is said in one file,
 | --- | --- |
 | `web-shell` | Serves the web app, each page with its own title and picture, so that a shared link shows as itself. |
 | `auth-service` | Signing in and signing up, and the accounts people sign in with. |
-| `actor-service` | Every kind of profile: people, groups and events, and the profiles of websites. |
+| `actor-service` | Every kind of profile it offers: people, groups, events and websites. |
 | `text-service` | Notes, articles and topics, and the replies to any post. |
 | `photo-service` | Photo posts. |
 | `feed-service` | The chronological feed, reposts, and the custom feeds people make. |
 | `socialgraph-service` | Who follows, blocks, mutes and subscribes to whom. |
 | `like-service` | Likes. |
 | `notification-service` | Notifications in the app. |
-| `search-service` | Search for people, groups, events, posts and shared feeds. |
+| `search-service` | Search for people, groups, events, websites, posts and shared feeds. |
 | `hashtag-service` | Hashtags. |
 | `location-service` | The locations posts are tagged with, and finding them on a map. |
 | `identity-image-service` | Profile and cover photos, made afresh at each size. |

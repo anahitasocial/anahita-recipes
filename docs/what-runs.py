@@ -59,6 +59,65 @@ RECIPES = {
 INK, MUTED, LINE, CARD, BORDER, GREY = "#202124", "#5f6368", "#5f6368", "#fff", "#dadce0", "#f1f3f4"
 
 
+# Each recipe's own words for what the services that make profiles and
+# posts give, from its k8s/instance.json: no file is everything, as on a
+# site (anahita-services' docs/instance-features.md).
+PROFILES = [("person", "people"), ("group", "groups"), ("event", "events"), ("website", "websites")]
+POSTS = {"text-service": [("note", "notes"), ("article", "articles"), ("topic", "topics")],
+         "photo-service": [("photo", "photos")]}
+# What each service's posts are called, for a sentence.
+POSTS_ARE = {"text-service": "Its posts", "photo-service": "Photo posts"}
+
+
+def offers(recipe):
+    """What the recipe's instance.json offers, by service: a list of kinds,
+    None for everything, or [] for a service it turns off."""
+    import json
+    path = ROOT / recipe / "k8s" / "instance.json"
+    said = {}
+    if path.exists():
+        for each in json.loads(path.read_text()):
+            said[each["service"]] = [] if each.get("enabled") is False else each.get("node_types")
+    return said
+
+
+def words(pairs, kinds):
+    names = [name for kind, name in pairs if kinds is None or kind in kinds]
+    return names
+
+
+def joined(names):
+    return names[0] if len(names) == 1 else ", ".join(names[:-1]) + " and " + names[-1]
+
+
+def always_for(recipe):
+    """ALWAYS, with what actor-service, text-service and photo-service give
+    in this recipe; and their sentences for its table."""
+    said = offers(recipe)
+    profiles = words(PROFILES, said.get("actor-service"))
+    if "person" not in [k for k, _ in PROFILES if k in (said.get("actor-service") or [])] and said.get("actor-service") is not None:
+        profiles = ["people"] + profiles
+    gives, says = {}, {}
+    gives["actor-service"] = ", ".join(profiles)
+    says["actor-service"] = f"Every kind of profile it offers: {joined(profiles)}."
+    says["search-service"] = f"Search for {joined(profiles + ['posts', 'shared feeds'])}."
+    for service, pairs in POSTS.items():
+        names = words(pairs, said.get(service))
+        if names:
+            gives[service] = ", ".join(names)
+            says[service] = (joined(names).capitalize() + ", and the replies to any post."
+                             if service == "text-service" else "Photo posts.")
+        else:
+            gives[service] = "photo posts off here" if service == "photo-service" else "off here"
+            says[service] = (f"{POSTS_ARE[service]}, which {article(recipe)} does not offer: "
+                             "it runs, and takes none.")
+    return [(name, gives.get(name, line)) for name, line in ALWAYS], says
+
+
+def article(recipe):
+    return "an " + recipe if recipe[0] in "aeiou" else "a " + recipe
+
+
 def text(x, y, words, size=13, color=INK, anchor="middle", weight=None):
     w = f' font-weight="{weight}"' if weight else ""
     return f'<text x="{x}" y="{y}" font-size="{size}" fill="{color}" text-anchor="{anchor}"{w}>{escape(words)}</text>'
@@ -128,7 +187,8 @@ def draw(recipe, offered):
     out.append(f'<rect x="36" y="{panel}" width="580" height="{panel_h}" rx="10" fill="{CARD}" stroke="{BORDER}" stroke-width="1.5"/>')
     out.append(text(52, panel + 22, "Always run", 13, anchor="start", weight="600"))
     out.append(text(140, panel + 22, "the API, and what each gives", 11, MUTED, anchor="start"))
-    for i, (name, gives) in enumerate(ALWAYS):
+    always, _ = always_for(recipe)
+    for i, (name, gives) in enumerate(always):
         out.append(service(52 + (i % 4) * 140, grid + (i // 4) * 50, 132, name, gives))
     out.append(text(52, shared_label, "Shared by the others, over gRPC", 11, MUTED, anchor="start"))
     for i, (name, gives) in enumerate(SHARED):
@@ -168,9 +228,9 @@ def draw(recipe, offered):
     desc = (f"One server running k3s. Traefik, with certificates from cert-manager, takes every request, from "
             f"client-side apps and from other servers, and hands it to the gateway, or to web-shell for the web app. "
             f"The gateway routes the API to {len(ALWAYS)} services that always run, each with what it gives: "
-            + "; ".join(f"{n}, {g}" for n, g in ALWAYS)
+            + "; ".join(f"{n}, {g}" for n, g in always_for(recipe)[0])
             + f". Three are shared over gRPC: the graph, files and email. {len(picks)} others, drawn dashed, run "
-            f"because {recipe} offers what they bring: {brings}.{gone} MySQL, Redis, RabbitMQ and Garage keep the "
+            f"because {article(recipe)} offers what they bring: {brings}.{gone} MySQL, Redis, RabbitMQ and Garage keep the "
             f"data; four jobs run by the clock or once. Outside the server: a mail provider, an object store if not "
             f"Garage, and DNS.")
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 {height}" width="960" height="{height}" '
@@ -212,9 +272,10 @@ SAYS = {
 START, END = "<!-- what-runs:start -->", "<!-- what-runs:end -->"
 
 
-def table(offered):
+def table(recipe, offered):
     rows = [("web-shell", SAYS["web-shell"])]
-    rows += [(name, SAYS[name]) for name, _ in ALWAYS + SHARED]
+    _, own = always_for(recipe)
+    rows += [(name, own.get(name, SAYS[name])) for name, _ in ALWAYS + SHARED]
     rows += [(OPTIONAL[key][1], SAYS[key]) for key in offered]
     lines = ["| Service | What it does |", "| --- | --- |"]
     lines += [f"| {', '.join(f'`{n.strip()}`' for n in names.split(','))} | {says} |" for names, says in rows]
@@ -227,12 +288,12 @@ def readme(recipe, offered):
     if START in words:
         before, rest = words.split(START, 1)
         after = rest.split(END, 1)[1]
-        words = before + table(offered) + after
+        words = before + table(recipe, offered) + after
     else:
         # The first time: after the paragraph that follows the diagram.
         at = words.index("](images/what-runs.svg)")
         at = words.index("\n\n", words.index("\n\n", at) + 2) + 2
-        words = words[:at] + table(offered) + "\n\n" + words[at:]
+        words = words[:at] + table(recipe, offered) + "\n\n" + words[at:]
     path.write_text(words)
 
 

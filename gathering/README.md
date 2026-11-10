@@ -69,8 +69,8 @@ setting on.
 | --- | --- |
 | `web-shell` | Serves the web app, each page with its own title and picture, so that a shared link shows as itself. |
 | `auth-service` | Signing in and signing up, and the accounts people sign in with. |
-| `actor-service` | Every kind of profile: people, groups and events, and the profiles of websites. |
-| `text-service` | Notes, articles and topics, and the replies to any post. |
+| `actor-service` | Every kind of profile it offers: people, groups and events. |
+| `text-service` | Notes and topics, and the replies to any post. |
 | `photo-service` | Photo posts. |
 | `feed-service` | The chronological feed, reposts, and the custom feeds people make. |
 | `socialgraph-service` | Who follows, blocks, mutes and subscribes to whom. |
