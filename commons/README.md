@@ -52,9 +52,9 @@ Anahita is small services, each doing one thing, so a site runs only what
 it offers. The solid ones are the site itself. Each dashed one brings one
 thing a site can go without, and is left out by a recipe that does not
 offer it: no videos, no Bluesky, no websites' feeds. `commons` offers
-everything, so it runs them all. Turning off what goes with a service in
-the web app, its buttons and pages, comes with anahita-services' roadmap
-row 139.
+everything, so it runs them all. What a site offers is said in one file,
+`instance.json`, and the web app and the services follow it: see
+`coffeehouse`, and anahita-services' `docs/instance-features.md`.
 
 ## Three things to decide first
 

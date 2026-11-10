@@ -13,7 +13,7 @@ empty server to the first person signed in.
 What a site does not need is not run, and what it needs more of is given
 more. That is what small services are for.
 
-**`commons` and `php-migration` are ready to try;** the others are planned.
+**`commons`, `coffeehouse` and `php-migration` are ready to try;** the others are planned.
 Nobody has tried them from start to finish yet: if you do, tell us how it
 went, in an [issue](https://github.com/anahitasocial/anahita-recipes/issues).
 
@@ -22,7 +22,7 @@ went, in an [issue](https://github.com/anahitasocial/anahita-recipes/issues).
 | Recipe | For | Like | State |
 | --- | --- | --- | --- |
 | [`commons`](#commons) | A classic social network | Mastodon and Pixelfed, but more | Ready to try |
-| [`coffeehouse`](#coffeehouse) | Microblogging | Mastodon, Bluesky | Planned |
+| [`coffeehouse`](#coffeehouse) | Microblogging | Mastodon, Bluesky | Ready to try |
 | [`journal`](#journal) | Long-form content | WordPress, Medium | Planned |
 | [`theatre`](#theatre) | Video sharing: arts, music, news, lectures | YouTube, PeerTube | Planned |
 | [`gathering`](#gathering) | Organising meetups and events | Meetup, Luma | Planned |
