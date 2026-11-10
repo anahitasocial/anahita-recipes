@@ -2,7 +2,8 @@
 
 Video sharing, on a channel of your own: arts, music, news and lectures.
 Videos of up to an hour, sound for music and talks, and notes for what
-goes around them. No articles, topics, events, websites or photo posts.
+goes around them. Each person is a channel. No groups, events or websites,
+no articles, topics or photo posts.
 With federation on ActivityPub and AT Protocol, so that people on
 Mastodon, Pixelfed, Bluesky and the rest of the Atmosphere can follow,
 watch and reply.
@@ -37,7 +38,7 @@ place.
 
 | Setting | theatre chooses | Why |
 | --- | --- | --- |
-| `instance.json` | People and groups; notes, videos and sound | What a theatre is for. Articles, topics, events, websites and photo posts are in no menu, composer or tab, and the services refuse them |
+| `instance.json` | People; notes, videos and sound | What a theatre is for, as on YouTube: channels, not groups. Groups, events, websites, articles, topics and photo posts are in no menu, composer or tab, and the services refuse them |
 | `REGISTRATION_MODE` | `approval` | Anybody may ask to join, and an administrator says yes, so that a new site is not filled by strangers before its rules are written |
 | `SITE_READ_ACCESS` | `public` | What is public may be read by anybody, as on Mastodon |
 | `FEDERATION_PROTOCOLS` | `activitypub,atproto` | Both networks. Each profile still chooses whether it federates |
@@ -70,14 +71,14 @@ setting on.
 | --- | --- |
 | `web-shell` | Serves the web app, each page with its own title and picture, so that a shared link shows as itself. |
 | `auth-service` | Signing in and signing up, and the accounts people sign in with. |
-| `actor-service` | Every kind of profile it offers: people and groups. |
+| `actor-service` | Every kind of profile it offers: people. |
 | `text-service` | Notes, and the replies to any post. |
 | `photo-service` | Photo posts, which a theatre does not offer: it runs, and takes none. |
 | `feed-service` | The chronological feed, reposts, and the custom feeds people make. |
 | `socialgraph-service` | Who follows, blocks, mutes and subscribes to whom. |
 | `like-service` | Likes. |
 | `notification-service` | Notifications in the app. |
-| `search-service` | Search for people, groups, posts and shared feeds. |
+| `search-service` | Search for people, posts and shared feeds. |
 | `hashtag-service` | Hashtags. |
 | `location-service` | The locations posts are tagged with, and finding them on a map. |
 | `identity-image-service` | Profile and cover photos, made afresh at each size. |

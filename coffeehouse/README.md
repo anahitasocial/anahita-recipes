@@ -1,7 +1,7 @@
 # coffeehouse
 
 Short posts and the conversation around them: people and their notes, and
-nothing else (the user, 2026-11-09). No groups, events or websites, no
+nothing else. No groups, events or websites, no
 articles, topics or photo posts, and no videos, GIFs or sound. For a town, a club or a field that wants to
 talk, not publish, with federation on ActivityPub and AT Protocol, so that
 people on Mastodon, Pixelfed, Bluesky and the rest of the Atmosphere can
