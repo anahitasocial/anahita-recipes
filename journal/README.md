@@ -5,9 +5,8 @@ beside it for what does not need an article, and photos. Each person
 writes under their own name, as on Medium or WordPress.com. Newsrooms
 and schools will have recipes of their own; until then, one that
 publishes together, in groups, can begin with [`commons`](../commons).
-No groups, topics, events or websites,
-and no videos, GIFs or sound. With federation on ActivityPub and AT Protocol, so that
-people on Mastodon, Pixelfed, Bluesky and the rest of the Atmosphere can
+No groups, topics, events or websites, and no videos, GIFs or sound. With
+federation on ActivityPub and AT Protocol, so that people on Mastodon, Pixelfed, Bluesky and the rest of the Atmosphere can
 follow and reply. A journal is written over time and kept, and old and
 useful articles are found as easily as new ones.
 
