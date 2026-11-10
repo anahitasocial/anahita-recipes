@@ -1,5 +1,5 @@
 # What a coffeehouse offers, instance.json, read by graph-grpc-service from
-# its features directory: people and groups, notes and photos. Mounted over
+# its features directory: people, and notes. Mounted over
 # the one file with subPath, so the image's other feature files stay
 # (anahita-services' docs/instance-features.md).
 apiVersion: apps/v1

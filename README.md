@@ -16,7 +16,7 @@ no knowledge of Kubernetes to follow one.
 | Recipe | For | Like |
 | --- | --- | --- |
 | [**commons**](commons) | A social network with everything: notes, photos, videos, articles, groups and events. The one to begin with | Mastodon and Pixelfed, but more |
-| [**coffeehouse**](coffeehouse) | Short posts and the conversation around them: notes and photos | Mastodon, Bluesky |
+| [**coffeehouse**](coffeehouse) | Short posts and the conversation around them: people and their notes | Mastodon, Bluesky |
 | [**journal**](journal) | Long writing: articles, with notes and photos beside them | WordPress, Medium |
 | [**theatre**](theatre) | Video and sound: lectures, music, a channel of your own | YouTube, PeerTube |
 | [**gathering**](gathering) | Meetups and events, with groups to host them | Meetup, Luma |

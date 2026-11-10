@@ -1,8 +1,8 @@
 # coffeehouse
 
-Short posts and the conversation around them: notes and photos, people
-and groups, and nothing else. No articles, topics, events or websites, and
-no videos, GIFs or sound. For a town, a club or a field that wants to
+Short posts and the conversation around them: people and their notes, and
+nothing else (the user, 2026-11-09). No groups, events or websites, no
+articles, topics or photo posts, and no videos, GIFs or sound. For a town, a club or a field that wants to
 talk, not publish, with federation on ActivityPub and AT Protocol, so that
 people on Mastodon, Pixelfed, Bluesky and the rest of the Atmosphere can
 follow and reply. Named after the coffeehouses of the seventeenth and
@@ -34,7 +34,7 @@ place.
 
 | Setting | coffeehouse chooses | Why |
 | --- | --- | --- |
-| `instance.json` | People and groups; notes and photos | What a coffeehouse is for. Articles, topics, events and websites are in no menu, composer or tab, and the services refuse them |
+| `instance.json` | People; notes | What a coffeehouse is for. Groups, events, websites, articles, topics and photo posts are in no menu, composer or tab, and the services refuse them |
 | `REGISTRATION_MODE` | `approval` | Anybody may ask to join, and an administrator says yes, so that a new site is not filled by strangers before its rules are written |
 | `SITE_READ_ACCESS` | `public` | What is public may be read by anybody, as on Mastodon |
 | `FEDERATION_PROTOCOLS` | `activitypub,atproto` | Both networks. Each profile still chooses whether it federates |
@@ -67,14 +67,14 @@ to `instance.json`, and turn its setting on.
 | --- | --- |
 | `web-shell` | Serves the web app, each page with its own title and picture, so that a shared link shows as itself. |
 | `auth-service` | Signing in and signing up, and the accounts people sign in with. |
-| `actor-service` | Every kind of profile it offers: people and groups. |
+| `actor-service` | Every kind of profile it offers: people. |
 | `text-service` | Notes, and the replies to any post. |
-| `photo-service` | Photo posts. |
+| `photo-service` | Photo posts, which a coffeehouse does not offer: it runs, and takes none. |
 | `feed-service` | The chronological feed, reposts, and the custom feeds people make. |
 | `socialgraph-service` | Who follows, blocks, mutes and subscribes to whom. |
 | `like-service` | Likes. |
 | `notification-service` | Notifications in the app. |
-| `search-service` | Search for people, groups, posts and shared feeds. |
+| `search-service` | Search for people, posts and shared feeds. |
 | `hashtag-service` | Hashtags. |
 | `location-service` | The locations posts are tagged with, and finding them on a map. |
 | `identity-image-service` | Profile and cover photos, made afresh at each size. |
