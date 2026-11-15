@@ -73,7 +73,12 @@ why() {
     echo "-- $store"; $K logs "statefulset/$store" --tail=60 --all-containers || true
   done
   echo "-- inside mysql-0: the open-files limits, and what runs"
-  $K exec mysql-0 -- sh -c 'echo "soft $(ulimit -n), hard $(ulimit -Hn)"; ps -eo pid,stat,etime,pcpu,args 2>/dev/null || ls /proc | head' || true
+  $K exec mysql-0 -- sh -c 'echo "soft $(ulimit -n), hard $(ulimit -Hn)"
+    for d in /proc/[0-9]*; do
+      printf "%s %s wchan=%s: " "${d#/proc/}" "$(sed -n "s/^State:\t//p" $d/status)" "$(cat $d/wchan 2>/dev/null)"
+      tr "\0" " " < $d/cmdline; echo
+    done
+    echo "data:"; ls -la /var/lib/mysql | head -20' || true
   echo "-- AppArmor's denials"; sudo dmesg 2>/dev/null | grep -i 'apparmor="DENIED"' | tail -10 || true
   echo "-- k3s and containerd"; k3s --version | head -1; sudo k3s ctr version 2>/dev/null | grep -i version | head -2 || true
   for job in migration-job garage-init; do
