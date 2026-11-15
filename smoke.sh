@@ -54,8 +54,11 @@ why() {
   [ $? = 0 ] && return
   echo; echo "== Why: the pods, the Jobs' logs, the latest events, the machine"
   $K get pods -o wide || true
+  for store in mysql redis rabbitmq garage; do
+    echo "-- $store"; $K logs "statefulset/$store" --tail=60 --all-containers || true
+  done
   for job in migration-job garage-init; do
-    echo "-- $job"; $K logs "job/$job" --tail=40 --all-containers || true
+    echo "-- $job"; $K logs "job/$job" --tail=20 --all-containers || true
   done
   $K get pods --no-headers | awk '$3 != "Running" && $3 != "Completed" {print $1}' | head -5 | while read -r pod; do
     echo "-- $pod"; $K describe pod "$pod" | tail -25 || true
@@ -64,6 +67,11 @@ why() {
   free -m; df -h / | tail -1
 }
 trap why EXIT
+
+step "The stores: MySQL, Redis, RabbitMQ and Garage"
+for store in mysql redis rabbitmq garage; do
+  $K rollout status "statefulset/$store" --timeout=300s
+done
 
 step "The Jobs: the database's migrations and Garage's setup"
 $K wait --for=condition=complete job/migration-job --timeout=900s
