@@ -79,7 +79,9 @@ why() {
       tr "\0" " " < $d/cmdline; echo
     done
     echo "data:"; ls -la /var/lib/mysql | head -20' || true
-  echo "-- AppArmor's denials"; sudo dmesg 2>/dev/null | grep -i 'apparmor="DENIED"' | tail -10 || true
+  echo "-- AppArmor's denials: MySQL's, then the last ten"
+  sudo dmesg 2>/dev/null | grep -i 'apparmor="DENIED"' | grep -i mysqld | tail -10 || true
+  sudo dmesg 2>/dev/null | grep -i 'apparmor="DENIED"' | tail -10 || true
   echo "-- k3s and containerd"; k3s --version | head -1; sudo k3s ctr version 2>/dev/null | grep -i version | head -2 || true
   for job in migration-job garage-init; do
     echo "-- $job"; $K logs "job/$job" --tail=20 --all-containers || true

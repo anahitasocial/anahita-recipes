@@ -10,6 +10,11 @@
 # program sends its own threads when it changes user (k3s issue 13625,
 # containerd issue 12886, not fixed yet); smoke.sh found it on GitHub's
 # runners. A data folder made before is already the mysql user's.
+#
+# On those kernels the same profile also refuses the signals MySQL sends
+# its own threads, and its first start never finishes: so MySQL runs
+# without that AppArmor profile, until containerd's is fixed. It is still
+# its own user, on a server of its own.
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -21,6 +26,8 @@ spec:
         runAsUser: 999
         runAsGroup: 999
         fsGroup: 999
+        appArmorProfile:
+          type: Unconfined
       containers:
         - name: mysql
           args:
