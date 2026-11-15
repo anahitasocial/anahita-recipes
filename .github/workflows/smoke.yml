@@ -1,0 +1,30 @@
+# Tries every recipe from make init to a running site, each on a runner of
+# its own as its server (./smoke.sh). Slower than check.yml: on a change to
+# what a site runs, once a week, and by hand.
+name: smoke
+on:
+  push:
+    branches: [main]
+    paths:
+      - '*/k8s/**'
+      - '*/Makefile'
+      - '*/scripts/**'
+      - smoke.sh
+      - .github/workflows/smoke.yml
+  schedule:
+    - cron: '30 6 * * 1'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    strategy:
+      fail-fast: false
+      matrix:
+        recipe: [commons, coffeehouse, journal, theatre, gathering, gallery, forum]
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: ${{ matrix.recipe }}, from make init to a running site
+        run: ./smoke.sh ${{ matrix.recipe }}
