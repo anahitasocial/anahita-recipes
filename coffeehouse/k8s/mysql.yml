@@ -2,6 +2,14 @@
 # new site's database, and no performance schema, which would take some
 # 200 MB to watch itself. Raise the pool as the database grows. The first
 # argument is the component's own, kept.
+#
+# It runs as the mysql user (999 in the image) from the start, not as root
+# switching to it: nothing in the database needs root, and the switch, by
+# gosu, spins for ever on newer kernels (6.17 and after) and never starts
+# MySQL. There containerd's AppArmor profile refuses the signals a Go
+# program sends its own threads when it changes user (k3s issue 13625,
+# containerd issue 12886, not fixed yet); smoke.sh found it on GitHub's
+# runners. A data folder made before is already the mysql user's.
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -9,6 +17,10 @@ metadata:
 spec:
   template:
     spec:
+      securityContext:
+        runAsUser: 999
+        runAsGroup: 999
+        fsGroup: 999
       containers:
         - name: mysql
           args:
