@@ -1,0 +1,76 @@
+# The site's addresses, and their certificates.
+#
+# example.org is the web app, sent by web-shell. api.example.org and
+# auth.example.org reach the same gateway: the web app calls the API at the
+# first, and the sign-in pages are at the second. files.example.org is
+# Garage, where browsers fetch files and send videos.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: anahita
+  annotations:
+    cert-manager.io/issuer: letsencrypt
+    # HTTPS only (https.yml).
+    traefik.ingress.kubernetes.io/router.middlewares: anahita-https-only@kubernetescrd,anahita-hsts@kubernetescrd
+spec:
+  tls:
+    - hosts:
+        - example.org
+        - api.example.org
+        - auth.example.org
+      secretName: anahita-tls
+  rules:
+    - host: example.org
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: web-shell
+                port:
+                  name: http
+    - host: api.example.org
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: gateway
+                port:
+                  name: http
+    - host: auth.example.org
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: gateway
+                port:
+                  name: http
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: garage
+  annotations:
+    cert-manager.io/issuer: letsencrypt
+    traefik.ingress.kubernetes.io/router.middlewares: anahita-https-only@kubernetescrd,anahita-hsts@kubernetescrd
+spec:
+  tls:
+    - hosts:
+        - files.example.org
+      secretName: garage-tls
+  rules:
+    - host: files.example.org
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: garage
+                port:
+                  name: s3

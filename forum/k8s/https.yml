@@ -1,0 +1,22 @@
+# HTTPS only: a request over plain HTTP is sent to the same address over
+# HTTPS, and browsers are told to keep to HTTPS for a year (HSTS).
+#
+# On the site's Ingresses (ingress.yml), not on all of Traefik, so that
+# Let's Encrypt's checks, over plain HTTP, go on being answered and the
+# certificates go on renewing.
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: https-only
+spec:
+  redirectScheme:
+    scheme: https
+    permanent: true
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: hsts
+spec:
+  headers:
+    stsSeconds: 31536000

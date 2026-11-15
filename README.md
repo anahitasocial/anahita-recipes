@@ -21,6 +21,7 @@ no knowledge of Kubernetes to follow one.
 | [**journal**](journal) | Long writing: articles, with notes and photos beside them | WordPress, Medium |
 | [**theatre**](theatre) | Video and sound: lectures, music, a channel of your own | YouTube, PeerTube |
 | [**gathering**](gathering) | Meetups and events, with groups to host them | Meetup, Luma |
+| [**forum**](forum) | Discussions that last: groups as boards, topics in them and the replies under them | Discourse, phpBB |
 | [**php-migration**](php-migration) | Moving an Anahita PHP site into a new commons site | |
 
 Whether a site is open to anybody or for its members only, as a school or
