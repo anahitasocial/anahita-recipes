@@ -13,9 +13,12 @@ their own name, and an old photo is found as easily as a new one.
 its home, where it is now the chronological feed (anahita-services'
 roadmap row 139).
 
-**Not tried yet from start to finish.** It is `commons` with less in it,
-and `commons` comes from banu.io, but this recipe has not yet made a site
-of its own. If you try it, tell us how it went in an
+**Tried on every change,** up to a running site: [smoke.sh](../smoke.sh)
+runs `make init`, `make server`, `make tunnel` and `make apply` on a GitHub
+runner as its server, then checks that every service it runs is ready and
+that it offers what its `instance.json` says. Not tried there: a domain of
+its own, Let's Encrypt's certificates, mail, and `make web`. If you run it
+on a server of your own, tell us how it went in an
 [issue](https://github.com/anahitasocial/anahita-recipes/issues).
 
 ## Contents

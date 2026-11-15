@@ -49,8 +49,12 @@ A server with 2 CPUs, 4 GB of memory and 40 GB of disk is enough to begin;
 Web Services, OVHcloud and Hetzner: [docs/providers.md](docs/providers.md)
 says which have been tried, and others that should work.
 
-**New, and not yet tried from start to finish.** If you try one, tell us
-how it went in an [issue](https://github.com/anahitasocial/anahita-recipes/issues).
+**Tried on every change.** [smoke.sh](smoke.sh) takes each recipe from
+`make init` to a running site, on a GitHub runner as its server, every
+service ready and offering what the recipe says; once a week too. A domain
+of its own, Let's Encrypt, mail and `make web` are not tried there. If you
+run one, tell us how it went in an
+[issue](https://github.com/anahitasocial/anahita-recipes/issues).
 
 ## More
 
