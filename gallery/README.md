@@ -1,13 +1,13 @@
 # gallery
 
-Photos, and the words that go with them: people and their photo posts,
-with notes beside them for what needs no picture. No groups, events or
-websites, no articles or topics, and no videos, GIFs or sound. For
-photographers, a camera club, an art school or a town that shows itself
-in pictures, with federation on ActivityPub and AT Protocol, so that
-people on Pixelfed, Mastodon, Bluesky and the rest of the Atmosphere can
-follow and reply. Each person shares their own, under their own name, and
-an old photo is found as easily as a new one.
+Photos, and the words that go with them: people and their photo posts, and
+the replies under them. No posts of words alone, as on Pixelfed or Flickr:
+no notes, articles or topics, no groups, events or websites, and no
+videos, GIFs or sound. For photographers, a camera club, an art school or
+a town that shows itself in pictures, with federation on ActivityPub and
+AT Protocol, so that people on Pixelfed, Mastodon, Bluesky and the rest of
+the Atmosphere can follow and reply. Each person shares their own, under
+their own name, and an old photo is found as easily as a new one.
 
 **Still to come,** each a piece of work of its own: a grid of photos as
 its home, where it is now the chronological feed (anahita-services'
@@ -38,7 +38,7 @@ place.
 
 | Setting | gallery chooses | Why |
 | --- | --- | --- |
-| `instance.json` | People; photos and notes | What a gallery is for, as on Pixelfed: each person's own photos. Groups, events, websites, articles and topics are in no menu, composer or tab, and the services refuse them |
+| `instance.json` | People; photos, and replies | What a gallery is for, as on Pixelfed: each person's own photos, and the conversation under them. Notes, articles, topics, groups, events and websites are in no menu, composer or tab, and the services refuse them |
 | `REGISTRATION_MODE` | `approval` | Anybody may ask to join, and an administrator says yes, so that a new site is not filled by strangers before its rules are written |
 | `SITE_READ_ACCESS` | `public` | What is public may be read by anybody, as on Mastodon |
 | `FEDERATION_PROTOCOLS` | `activitypub,atproto` | Both networks. Each profile still chooses whether it federates |
@@ -73,7 +73,7 @@ to `instance.json`, and turn its setting on.
 | `web-shell` | Serves the web app, each page with its own title and picture, so that a shared link shows as itself. |
 | `auth-service` | Signing in and signing up, and the accounts people sign in with. |
 | `actor-service` | Every kind of profile it offers: people. |
-| `text-service` | Notes, and the replies to any post. |
+| `text-service` | The replies under any post. A gallery takes no notes, articles or topics: it runs for the replies. |
 | `photo-service` | Photo posts. |
 | `feed-service` | The chronological feed, reposts, and the custom feeds people make. |
 | `socialgraph-service` | Who follows, blocks, mutes and subscribes to whom. |

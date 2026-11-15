@@ -1,5 +1,6 @@
 # What a gallery offers, instance.json, read by graph-grpc-service from
-# its features directory: people, their photos, and notes. Mounted over
+# its features directory: people and their photos, and the replies under
+# them. Mounted over
 # the one file with subPath, so the image's other feature files stay
 # (anahita-services' docs/instance-features.md).
 apiVersion: apps/v1

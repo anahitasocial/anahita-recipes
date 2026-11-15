@@ -1,9 +1,9 @@
 # theatre
 
 Video sharing, on a channel of your own: arts, music, news and lectures.
-Videos of up to an hour, sound for music and talks, and notes for what
-goes around them. Each person is a channel. No groups, events or websites,
-no articles, topics or photo posts.
+Videos of up to an hour, sound for music and talks, and the replies under
+them. Each person is a channel. No posts of words alone (notes, articles or
+topics), no photo posts, and no groups, events or websites.
 With federation on ActivityPub and AT Protocol, so that people on
 Mastodon, Pixelfed, Bluesky and the rest of the Atmosphere can follow,
 watch and reply.
@@ -38,7 +38,7 @@ place.
 
 | Setting | theatre chooses | Why |
 | --- | --- | --- |
-| `instance.json` | People; notes, videos and sound | What a theatre is for, as on YouTube: channels, not groups. Groups, events, websites, articles, topics and photo posts are in no menu, composer or tab, and the services refuse them |
+| `instance.json` | People; videos and sound, and replies | What a theatre is for, as on YouTube: channels, not groups. Groups, events, websites, articles, topics and photo posts are in no menu, composer or tab, and the services refuse them |
 | `REGISTRATION_MODE` | `approval` | Anybody may ask to join, and an administrator says yes, so that a new site is not filled by strangers before its rules are written |
 | `SITE_READ_ACCESS` | `public` | What is public may be read by anybody, as on Mastodon |
 | `FEDERATION_PROTOCOLS` | `activitypub,atproto` | Both networks. Each profile still chooses whether it federates |
@@ -72,7 +72,7 @@ setting on.
 | `web-shell` | Serves the web app, each page with its own title and picture, so that a shared link shows as itself. |
 | `auth-service` | Signing in and signing up, and the accounts people sign in with. |
 | `actor-service` | Every kind of profile it offers: people. |
-| `text-service` | Notes, and the replies to any post. |
+| `text-service` | The replies under any post. A theatre takes no notes, articles or topics: it runs for the replies. |
 | `photo-service` | Photo posts, which a theatre does not offer: it runs, and takes none. |
 | `feed-service` | The chronological feed, reposts, and the custom feeds people make. |
 | `socialgraph-service` | Who follows, blocks, mutes and subscribes to whom. |

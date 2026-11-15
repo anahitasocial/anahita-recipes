@@ -136,7 +136,13 @@ def always_for(recipe):
     says["search-service"] = f"Search for {joined(profiles + ['posts', 'shared feeds'])}."
     for service, pairs in POSTS.items():
         names = words(pairs, said.get(service))
-        if names:
+        if not names and "reply" in (said.get(service) or []):
+            # Replies alone: no posts of its own, the replies under the
+            # others' (anahita-services' docs/instance-features.md).
+            gives[service] = "replies"
+            says[service] = (f"The replies under any post. {article(recipe).capitalize()} takes no notes, "
+                             "articles or topics: it runs for the replies.")
+        elif names:
             gives[service] = ", ".join(names)
             says[service] = (joined(names).capitalize() + ", and the replies to any post."
                              if service == "text-service" else "Photo posts.")

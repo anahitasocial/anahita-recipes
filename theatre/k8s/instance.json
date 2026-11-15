@@ -1,6 +1,6 @@
 [
   {"service": "actor-service", "node_types": ["person"]},
-  {"service": "text-service", "node_types": ["note"]},
+  {"service": "text-service", "node_types": ["reply"]},
   {"service": "photo-service", "enabled": false},
   {"service": "video-service", "node_types": ["video", "audio"]}
 ]
