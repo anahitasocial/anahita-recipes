@@ -33,6 +33,21 @@ cat ~/.ssh/id_ed25519.pub >> ~/.ssh/authorized_keys
 chmod 600 ~/.ssh/authorized_keys
 ssh-keyscan -H 127.0.0.1 >> ~/.ssh/known_hosts 2>/dev/null
 
+step "This machine as a fresh server"
+# GitHub's runner comes with MySQL installed, and with it an AppArmor profile
+# for /usr/sbin/mysqld, which the kernel applies to the MySQL in the cluster
+# too, the same path, and which stalls it. A fresh server has none: it is
+# taken away here, and said.
+if sudo aa-status 2>/dev/null | grep -q mysqld; then
+  echo "  the runner's AppArmor profile for mysqld: taken away"
+  for profile in /etc/apparmor.d/usr.sbin.mysqld /etc/apparmor.d/mysqld; do
+    [ -f "$profile" ] && sudo apparmor_parser -R "$profile" 2>/dev/null || true
+  done
+  sudo aa-status 2>/dev/null | grep mysqld || echo "  none left"
+else
+  echo "  no AppArmor profile for mysqld"
+fi
+
 step "make init"
 # The answers, in the order init.sh asks: domain, name, email, from,
 # support, SMTP server, port, user, password, server, SSH user.
@@ -59,6 +74,7 @@ why() {
   done
   echo "-- inside mysql-0: the open-files limits, and what runs"
   $K exec mysql-0 -- sh -c 'echo "soft $(ulimit -n), hard $(ulimit -Hn)"; ps -eo pid,stat,etime,pcpu,args 2>/dev/null || ls /proc | head' || true
+  echo "-- AppArmor's denials"; sudo dmesg 2>/dev/null | grep -i 'apparmor="DENIED"' | tail -10 || true
   echo "-- k3s and containerd"; k3s --version | head -1; sudo k3s ctr version 2>/dev/null | grep -i version | head -2 || true
   for job in migration-job garage-init; do
     echo "-- $job"; $K logs "job/$job" --tail=20 --all-containers || true
