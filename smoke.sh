@@ -49,6 +49,22 @@ make apply
 
 K="kubectl --kubeconfig $HOME/.kube/$domain.yaml --context $domain -n anahita"
 
+# On a failure from here on: what the cluster was doing, to see why.
+why() {
+  [ $? = 0 ] && return
+  echo; echo "== Why: the pods, the Jobs' logs, the latest events, the machine"
+  $K get pods -o wide || true
+  for job in migration-job garage-init; do
+    echo "-- $job"; $K logs "job/$job" --tail=40 --all-containers || true
+  done
+  $K get pods --no-headers | awk '$3 != "Running" && $3 != "Completed" {print $1}' | head -5 | while read -r pod; do
+    echo "-- $pod"; $K describe pod "$pod" | tail -25 || true
+  done
+  $K get events --sort-by=.lastTimestamp | tail -40 || true
+  free -m; df -h / | tail -1
+}
+trap why EXIT
+
 step "The Jobs: the database's migrations and Garage's setup"
 $K wait --for=condition=complete job/migration-job --timeout=900s
 if $K get job garage-init >/dev/null 2>&1; then
