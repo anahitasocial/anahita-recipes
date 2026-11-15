@@ -42,19 +42,19 @@ on the same server, at the version named in
 [k8s/kustomization.yml](k8s/kustomization.yml).
 
 ![One server running k3s. Traefik takes every request and hands it to the
-gateway, or to web-shell for the web app. Thirteen services always run,
-with three shared over gRPC; eight others, dashed, run only if the site
-offers what they bring. MySQL, Redis, RabbitMQ and Garage keep the data,
-and four jobs run by the clock or once. Outside: a mail provider, an object
-store if not Garage, and DNS.](images/what-runs.svg)
+gateway, or to web-shell for the web app. Twelve services always run, with
+three shared over gRPC; eight others, dashed, run only if the site offers
+what they bring. MySQL, Redis, RabbitMQ and Garage keep the data, and four
+jobs run by the clock or once. Outside: a mail provider, an object store
+if not Garage, and DNS.](images/what-runs.svg)
 
 Anahita is small services, each doing one thing, so a site runs only what
 it offers. The solid ones are the site itself. Each dashed one brings one
 thing a site can go without, and is left out by a recipe that does not
-offer it: no videos, no Bluesky, no websites' feeds. `commons` offers
-everything, so it runs them all. What a site offers is said in one file,
-`instance.json`, and the web app and the services follow it: see
-`coffeehouse`, and anahita-services' `docs/instance-features.md`.
+offer it: no photo posts, no videos, no Bluesky, no websites' feeds.
+`commons` offers everything, so it runs them all. What a site offers is
+said in one file, `instance.json`, and the web app and the services follow
+it: see `coffeehouse`, and anahita-services' `docs/instance-features.md`.
 
 <!-- what-runs:start -->
 
@@ -66,7 +66,6 @@ everything, so it runs them all. What a site offers is said in one file,
 | `auth-service` | Signing in and signing up, and the accounts people sign in with. |
 | `actor-service` | Every kind of profile it offers: people, groups, events and websites. |
 | `text-service` | Notes, articles and topics, and the replies to any post. |
-| `photo-service` | Photo posts. |
 | `feed-service` | The chronological feed, reposts, and the custom feeds people make. |
 | `socialgraph-service` | Who follows, blocks, mutes and subscribes to whom. |
 | `like-service` | Likes. |
@@ -79,6 +78,7 @@ everything, so it runs them all. What a site offers is said in one file,
 | `graph-grpc-service` | The graph every other service reads: profiles and posts are its nodes, and the ties between them its edges. |
 | `file-grpc-service` | Files, in Garage or any S3-compatible store. |
 | `mail-grpc-service` | Email, over SMTP. |
+| `photo-service` | Photo posts, and the pictures in a reply. |
 | `video-service`, `video-worker` | Video, GIF and audio posts; video-worker makes each ready for every screen. |
 | `activitypub-service` | Makes the site a server of the fediverse, for the people who choose to be found there. |
 | `atproto-service` | Bluesky and the rest of the Atmosphere: following profiles there, and posting there for whoever connects their own account. |

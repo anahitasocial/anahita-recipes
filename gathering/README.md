@@ -48,11 +48,10 @@ It runs what it offers, with MySQL, Redis, RabbitMQ and Garage on the same
 server, at the version named in [k8s/kustomization.yml](k8s/kustomization.yml).
 
 ![One server running k3s. Traefik takes every request and hands it to the
-gateway, or to web-shell for the web app. Thirteen services always run,
-with three shared over gRPC; 5 others, dashed, run because a gathering
-offers what they bring. What it does not offer is not run. MySQL, Redis,
-RabbitMQ and Garage keep the data, and four jobs run by the clock or
-once.](images/what-runs.svg)
+gateway, or to web-shell for the web app. Twelve services always run, with
+three shared over gRPC; six others, dashed, run because a gathering offers
+what they bring. Video and websites' feeds are not run. MySQL, Redis,
+RabbitMQ and Garage keep the data, and four jobs run by the clock or once.](images/what-runs.svg)
 
 Anahita is small services, each doing one thing, so a site runs only what
 it offers. A gathering does not run video-service, video-worker, syndication-service, syndication-worker:
@@ -71,7 +70,6 @@ setting on.
 | `auth-service` | Signing in and signing up, and the accounts people sign in with. |
 | `actor-service` | Every kind of profile it offers: people, groups and events. |
 | `text-service` | Notes and topics, and the replies to any post. |
-| `photo-service` | Photo posts. |
 | `feed-service` | The chronological feed, reposts, and the custom feeds people make. |
 | `socialgraph-service` | Who follows, blocks, mutes and subscribes to whom. |
 | `like-service` | Likes. |
@@ -84,6 +82,7 @@ setting on.
 | `graph-grpc-service` | The graph every other service reads: profiles and posts are its nodes, and the ties between them its edges. |
 | `file-grpc-service` | Files, in Garage or any S3-compatible store. |
 | `mail-grpc-service` | Email, over SMTP. |
+| `photo-service` | Photo posts, and the pictures in a reply. |
 | `activitypub-service` | Makes the site a server of the fediverse, for the people who choose to be found there. |
 | `atproto-service` | Bluesky and the rest of the Atmosphere: following profiles there, and posting there for whoever connects their own account. |
 | `link-preview-service` | The card under a note that links to a page: its title and picture. |

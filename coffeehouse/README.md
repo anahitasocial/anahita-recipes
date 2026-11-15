@@ -1,13 +1,13 @@
 # coffeehouse
 
-Short posts and the conversation around them: people and their notes, and
-nothing else. No groups, events or websites, no
-articles, topics or photo posts, and no videos, GIFs or sound. For a town, a club or a field that wants to
-talk, not publish, with federation on ActivityPub and AT Protocol, so that
-people on Mastodon, Pixelfed, Bluesky and the rest of the Atmosphere can
-follow and reply. Named after the coffeehouses of the seventeenth and
-eighteenth centuries, called penny universities: for the price of a
-coffee, anybody could sit down and argue about the news.
+Short posts and the conversation around them: people, their notes and
+their photos, as on Mastodon or Bluesky. No groups, events or websites, no
+articles or topics, and no videos, GIFs or sound. For a town, a club or a
+field that wants to talk, not publish, with federation on ActivityPub and
+AT Protocol, so that people on Mastodon, Pixelfed, Bluesky and the rest of
+the Atmosphere can follow and reply. Named after the coffeehouses of the
+seventeenth and eighteenth centuries, called penny universities: for the
+price of a coffee, anybody could sit down and argue about the news.
 
 **Not tried yet from start to finish.** It is `commons` with less in it,
 and `commons` comes from banu.io, but this recipe has not yet made a site
@@ -34,7 +34,7 @@ place.
 
 | Setting | coffeehouse chooses | Why |
 | --- | --- | --- |
-| `instance.json` | People; notes | What a coffeehouse is for. Groups, events, websites, articles, topics and photo posts are in no menu, composer or tab, and the services refuse them |
+| `instance.json` | People; notes and photos | What a coffeehouse is for, as on Mastodon or Bluesky. Groups, events, websites, articles and topics are in no menu, composer or tab, and the services refuse them |
 | `REGISTRATION_MODE` | `approval` | Anybody may ask to join, and an administrator says yes, so that a new site is not filled by strangers before its rules are written |
 | `SITE_READ_ACCESS` | `public` | What is public may be read by anybody, as on Mastodon |
 | `FEDERATION_PROTOCOLS` | `activitypub,atproto` | Both networks. Each profile still chooses whether it federates |
@@ -46,11 +46,11 @@ It runs what it offers, with MySQL, Redis, RabbitMQ and Garage on the same
 server, at the version named in [k8s/kustomization.yml](k8s/kustomization.yml).
 
 ![One server running k3s. Traefik takes every request and hands it to the
-gateway, or to web-shell for the web app. Thirteen services always run,
-with three shared over gRPC; five others, dashed, run because a
-coffeehouse offers what they bring. Video and websites' feeds are not run.
-MySQL, Redis, RabbitMQ and Garage keep the data, and four jobs run by the
-clock or once.](images/what-runs.svg)
+gateway, or to web-shell for the web app. Twelve services always run, with
+three shared over gRPC; six others, dashed, run because a coffeehouse
+offers what they bring. Video and websites' feeds are not run. MySQL,
+Redis, RabbitMQ and Garage keep the data, and four jobs run by the clock
+or once.](images/what-runs.svg)
 
 Anahita is small services, each doing one thing, so a site runs only what
 it offers. A coffeehouse does not run video-service, video-worker,
@@ -69,7 +69,6 @@ to `instance.json`, and turn its setting on.
 | `auth-service` | Signing in and signing up, and the accounts people sign in with. |
 | `actor-service` | Every kind of profile it offers: people. |
 | `text-service` | Notes, and the replies to any post. |
-| `photo-service` | Photo posts, which a coffeehouse does not offer: it runs, and takes none. |
 | `feed-service` | The chronological feed, reposts, and the custom feeds people make. |
 | `socialgraph-service` | Who follows, blocks, mutes and subscribes to whom. |
 | `like-service` | Likes. |
@@ -82,6 +81,7 @@ to `instance.json`, and turn its setting on.
 | `graph-grpc-service` | The graph every other service reads: profiles and posts are its nodes, and the ties between them its edges. |
 | `file-grpc-service` | Files, in Garage or any S3-compatible store. |
 | `mail-grpc-service` | Email, over SMTP. |
+| `photo-service` | Photo posts, and the pictures in a reply. |
 | `activitypub-service` | Makes the site a server of the fediverse, for the people who choose to be found there. |
 | `atproto-service` | Bluesky and the rest of the Atmosphere: following profiles there, and posting there for whoever connects their own account. |
 | `link-preview-service` | The card under a note that links to a page: its title and picture. |

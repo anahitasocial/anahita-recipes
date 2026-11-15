@@ -20,7 +20,6 @@ ALWAYS = [
     ("auth-service", "sign-in, accounts"),
     ("actor-service", "people, groups, events"),
     ("text-service", "notes, articles, topics"),
-    ("photo-service", "photos"),
     ("feed-service", "feeds, reposts"),
     ("socialgraph-service", "follows, blocks, mutes"),
     ("like-service", "likes"),
@@ -38,6 +37,7 @@ SHARED = [
 ]
 # Run only where a site offers what they bring: what, and the services.
 OPTIONAL = {
+    "photos": ("Photo posts", "photo-service"),
     "video": ("Videos, GIFs and sound", "video-service, video-worker"),
     "fediverse": ("The fediverse", "activitypub-service"),
     "atmosphere": ("Bluesky and the Atmosphere", "atproto-service"),
@@ -50,11 +50,11 @@ EVERYTHING = list(OPTIONAL)
 SOCIAL = ["fediverse", "atmosphere", "cards", "follow", "data"]
 RECIPES = {
     "commons": EVERYTHING,
-    "coffeehouse": SOCIAL,
-    "journal": SOCIAL,
+    "coffeehouse": ["photos"] + SOCIAL,
+    "journal": ["photos"] + SOCIAL,
     "theatre": ["video"] + SOCIAL,
-    "gathering": SOCIAL,
-    "gallery": SOCIAL,
+    "gathering": ["photos"] + SOCIAL,
+    "gallery": ["photos"] + SOCIAL,
     "forum": SOCIAL,
 }
 
@@ -77,7 +77,7 @@ LEGEND = [
 ]
 # Each always-run service's kind, which is its row in the diagram.
 KIND = {
-    "actor-service": "posts", "text-service": "posts", "photo-service": "posts",
+    "actor-service": "posts", "text-service": "posts",
     "identity-image-service": "posts",
     "feed-service": "people", "socialgraph-service": "people", "like-service": "people",
     "notification-service": "people",
@@ -95,10 +95,9 @@ JOBS = ["migration-job: at each version", "account-sweeper: every 10 min",
 # posts give, from its k8s/instance.json: no file is everything, as on a
 # site (anahita-services' docs/instance-features.md).
 PROFILES = [("person", "people"), ("group", "groups"), ("event", "events"), ("website", "websites")]
-POSTS = {"text-service": [("note", "notes"), ("article", "articles"), ("topic", "topics")],
-         "photo-service": [("photo", "photos")]}
+POSTS = {"text-service": [("note", "notes"), ("article", "articles"), ("topic", "topics")]}
 # What each service's posts are called, for a sentence.
-POSTS_ARE = {"text-service": "Its posts", "photo-service": "Photo posts"}
+POSTS_ARE = {"text-service": "Its posts"}
 
 
 def offers(recipe):
@@ -123,7 +122,7 @@ def joined(names):
 
 
 def always_for(recipe):
-    """ALWAYS, with what actor-service, text-service and photo-service give
+    """ALWAYS, with what actor-service and text-service give
     in this recipe; and their sentences for its table."""
     said = offers(recipe)
     profiles = words(PROFILES, said.get("actor-service"))
@@ -148,7 +147,7 @@ def always_for(recipe):
             says[service] = (joined(names).capitalize() + ", and the replies to any post."
                              if service == "text-service" else "Photo posts.")
         else:
-            gives[service] = "photo posts off here" if service == "photo-service" else "off here"
+            gives[service] = "off here"
             says[service] = (f"{POSTS_ARE[service]}, which {article(recipe)} does not offer: "
                              "it runs, and takes none.")
     return [(name, gives.get(name, line)) for name, line in ALWAYS], says
@@ -345,7 +344,6 @@ SAYS = {
     "auth-service": "Signing in and signing up, and the accounts people sign in with.",
     "actor-service": "Every kind of profile: people, groups and events, and the profiles of websites.",
     "text-service": "Notes, articles and topics, and the replies to any post.",
-    "photo-service": "Photo posts.",
     "feed-service": "The chronological feed, reposts, and the custom feeds people make.",
     "socialgraph-service": "Who follows, blocks, mutes and subscribes to whom.",
     "like-service": "Likes.",
@@ -359,6 +357,7 @@ SAYS = {
     "file-grpc-service": "Files, in Garage or any S3-compatible store.",
     "mail-grpc-service": "Email, over SMTP.",
     "web-shell": "Serves the web app, each page with its own title and picture, so that a shared link shows as itself.",
+    "photos": "Photo posts, and the pictures in a reply.",
     "video": "Video, GIF and audio posts; video-worker makes each ready for every screen.",
     "fediverse": "Makes the site a server of the fediverse, for the people who choose to be found there.",
     "atmosphere": "Bluesky and the rest of the Atmosphere: following profiles there, and posting there for whoever connects their own account.",

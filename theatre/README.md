@@ -50,18 +50,18 @@ It runs what it offers, with MySQL, Redis, RabbitMQ and Garage on the same
 server, at the version named in [k8s/kustomization.yml](k8s/kustomization.yml).
 
 ![One server running k3s. Traefik takes every request and hands it to the
-gateway, or to web-shell for the web app. Thirteen services always run,
-with three shared over gRPC; 6 others, dashed, run because a theatre
-offers what they bring. What it does not offer is not run. MySQL, Redis,
-RabbitMQ and Garage keep the data, and four jobs run by the clock or
-once.](images/what-runs.svg)
+gateway, or to web-shell for the web app. Twelve services always run, with
+three shared over gRPC; six others, dashed, run because a theatre offers
+what they bring. Photo posts and websites' feeds are not run. MySQL,
+Redis, RabbitMQ and Garage keep the data, and four jobs run by the clock
+or once.](images/what-runs.svg)
 
 Anahita is small services, each doing one thing, so a site runs only what
-it offers. A theatre does not run syndication-service, syndication-worker:
-[k8s/not-run.yml](k8s/not-run.yml) gives them no replicas, so they use no
-memory, and their addresses stay for the gateway. To offer one again, take
-it out of that file, add its kinds to `instance.json`, and turn its
-setting on.
+it offers. A theatre does not run photo-service, syndication-service or
+syndication-worker: [k8s/not-run.yml](k8s/not-run.yml) gives them no
+replicas, so they use no memory, and their addresses stay for the gateway.
+To offer one again, take it out of that file, add its kinds to
+`instance.json`, and turn its setting on.
 
 <!-- what-runs:start -->
 
@@ -73,7 +73,6 @@ setting on.
 | `auth-service` | Signing in and signing up, and the accounts people sign in with. |
 | `actor-service` | Every kind of profile it offers: people. |
 | `text-service` | The replies under any post. A theatre takes no notes, articles or topics: it runs for the replies. |
-| `photo-service` | Photo posts, which a theatre does not offer: it runs, and takes none. |
 | `feed-service` | The chronological feed, reposts, and the custom feeds people make. |
 | `socialgraph-service` | Who follows, blocks, mutes and subscribes to whom. |
 | `like-service` | Likes. |
