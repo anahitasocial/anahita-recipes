@@ -315,9 +315,15 @@ def draw(recipe, offered):
     out.append(card(380, outside, 200, 52, "Object store", "S3: files, if not Garage", dashed=True))
     out.append(card(700, outside, 200, 52, "DNS", "the site's names"))
 
-    brings = ", ".join(what if what.startswith("Bluesky") else what.lower() for what, _ in picks)
-    gone = (" " + " and ".join(w if w.startswith("Bluesky") else w.lower() for w, _ in left_out)
-            + " are not run.") if left_out else ""
+    # In a sentence: lower case but for names (Bluesky, GIFs), the last two
+    # joined by "and" and the rest by commas, the list's own "and" kept.
+    def said(what):
+        return what if what.startswith("Bluesky") else what[0].lower() + what[1:]
+    def listed(names):
+        names = [said(n) for n in names]
+        return names[0] if len(names) == 1 else "; ".join(names[:-1]) + "; and " + names[-1]
+    brings = listed([what for what, _ in picks])
+    gone = (" Not run: " + listed([what for what, _ in left_out]) + ".") if left_out else ""
     desc = (f"One server running k3s. Traefik, with certificates from cert-manager, takes every request, from "
             f"client-side apps and from other servers, and hands it to the gateway, or to web-shell for the web app. "
             f"The gateway routes the API to {len(ALWAYS)} services that always run, each with what it gives: "
