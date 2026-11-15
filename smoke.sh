@@ -57,6 +57,9 @@ why() {
   for store in mysql redis rabbitmq garage; do
     echo "-- $store"; $K logs "statefulset/$store" --tail=60 --all-containers || true
   done
+  echo "-- inside mysql-0: the open-files limits, and what runs"
+  $K exec mysql-0 -- sh -c 'echo "soft $(ulimit -n), hard $(ulimit -Hn)"; ps -eo pid,stat,etime,pcpu,args 2>/dev/null || ls /proc | head' || true
+  echo "-- k3s and containerd"; k3s --version | head -1; sudo k3s ctr version 2>/dev/null | grep -i version | head -2 || true
   for job in migration-job garage-init; do
     echo "-- $job"; $K logs "job/$job" --tail=20 --all-containers || true
   done
