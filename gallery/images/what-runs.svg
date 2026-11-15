@@ -1,0 +1,185 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 1054" width="960" height="1054" font-family="Inter, 'SF Pro Text', 'Segoe UI', Helvetica, Arial, sans-serif" role="img" aria-labelledby="title desc">
+<title id="title">What runs on a gallery server</title>
+<desc id="desc">One server running k3s. Traefik, with certificates from cert-manager, takes every request, from client-side apps and from other servers, and hands it to the gateway, or to web-shell for the web app. The gateway routes the API to 13 services that always run, each with what it gives: auth-service, sign-in, accounts; actor-service, people; text-service, notes; photo-service, photos; feed-service, feeds, reposts; socialgraph-service, follows, blocks, mutes; like-service, likes; notification-service, notifications; search-service, search; hashtag-service, hashtags; location-service, locations, maps; identity-image-service, profile and cover photos; abuse-report-service, reports. Three are shared over gRPC: the graph, files and email. 5 others, drawn dashed, run because a gallery offers what they bring: the fediverse, Bluesky and the Atmosphere, cards for links, who to follow, downloads and imports. videos, gifs and sound and websites&#x27; feeds are not run. MySQL, Redis, RabbitMQ and Garage keep the data; four jobs run by the clock or once. Outside the server: a mail provider, an object store if not Garage, and DNS.</desc>
+<defs>
+<filter id="shadow" x="-10%" y="-10%" width="120%" height="140%"><feDropShadow dx="0" dy="1.5" stdDeviation="2.5" flood-color="#0F172A" flood-opacity="0.08"/></filter>
+<marker id="in" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+<marker id="out" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#94A3B8"/></marker>
+</defs>
+<rect width="960" height="1054" rx="16" fill="#F8FAFC"/>
+<text x="32" y="50" font-size="22" fill="#0F172A" text-anchor="start" font-weight="700">What runs on a gallery server</text>
+<text x="32" y="72" font-size="12" fill="#64748B" text-anchor="start">The gallery recipe · Anahita v1.2.7 · each box a pod</text>
+<rect x="560" y="20" width="376" height="72" rx="8" fill="#FFFFFF" stroke="#E2E8F0"/>
+<rect x="572" y="32" width="3" height="10" rx="1.5" fill="#2563EB"/>
+<text x="594" y="41" font-size="11" fill="#0F172A" text-anchor="start">profiles and posts</text>
+<rect x="752" y="32" width="3" height="10" rx="1.5" fill="#7C3AED"/>
+<text x="774" y="41" font-size="11" fill="#0F172A" text-anchor="start">between people</text>
+<rect x="572" y="52" width="3" height="10" rx="1.5" fill="#0D9488"/>
+<text x="594" y="61" font-size="11" fill="#0F172A" text-anchor="start">finding things</text>
+<rect x="752" y="52" width="3" height="10" rx="1.5" fill="#EA580C"/>
+<text x="774" y="61" font-size="11" fill="#0F172A" text-anchor="start">signing in, and safety</text>
+<rect x="572" y="72" width="3" height="10" rx="1.5" fill="#CA8A04"/>
+<text x="594" y="81" font-size="11" fill="#0F172A" text-anchor="start">shared, over gRPC</text>
+<rect x="752" y="72" width="16" height="10" rx="2" fill="#FFFFFF" stroke="#94A3B8" stroke-dasharray="3 2"/>
+<circle cx="760" cy="77" r="2" fill="#C026D3"/>
+<text x="774" y="81" font-size="11" fill="#0F172A" text-anchor="start">only if the site offers it</text>
+<rect x="160" y="112" width="240" height="52" rx="6" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow)"/>
+<text x="280.0" y="135.0" font-size="12" fill="#0F172A" text-anchor="middle" font-weight="600">Client-side apps</text>
+<text x="280.0" y="151.0" font-size="10.5" fill="#64748B" text-anchor="middle">browser, mobile</text>
+<rect x="560" y="112" width="240" height="52" rx="6" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow)"/>
+<text x="680.0" y="135.0" font-size="12" fill="#0F172A" text-anchor="middle" font-weight="600">Other servers</text>
+<text x="680.0" y="151.0" font-size="10.5" fill="#64748B" text-anchor="middle">the fediverse, the Atmosphere</text>
+<rect x="20" y="196" width="920" height="734" rx="12" fill="#EEF2F7" stroke="#E2E8F0"/>
+<text x="36" y="218" font-size="9.5" fill="#94A3B8" text-anchor="start" font-weight="700" letter-spacing="0.8">ONE SERVER, RUNNING K3S</text>
+<path d="M280 164 L392 236" stroke="#334155" stroke-width="1.6" fill="none" marker-end="url(#in)"/>
+<path d="M680 164 L448 236" stroke="#334155" stroke-width="1.6" fill="none" marker-end="url(#in)"/>
+<path d="M320 264 L268 264" stroke="#334155" stroke-width="1.6" fill="none" marker-end="url(#in)"/>
+<path d="M520 264 L572 264" stroke="#334155" stroke-width="1.6" fill="none" marker-end="url(#in)"/>
+<path d="M640 288 L560 320" stroke="#334155" stroke-width="1.6" fill="none" marker-end="url(#in)"/>
+<path d="M720 288 L770 320" stroke="#334155" stroke-width="1.6" fill="none" marker-end="url(#in)"/>
+<rect x="48" y="240" width="216" height="48" rx="6" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow)"/>
+<text x="156.0" y="261.0" font-size="12" fill="#0F172A" text-anchor="middle" font-weight="600">web-shell</text>
+<text x="156.0" y="277.0" font-size="10.5" fill="#64748B" text-anchor="middle">the web app, and links shared</text>
+<rect x="324" y="240" width="192" height="48" rx="6" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow)"/>
+<text x="420.0" y="261.0" font-size="12" fill="#0F172A" text-anchor="middle" font-weight="600">Traefik</text>
+<text x="420.0" y="277.0" font-size="10.5" fill="#64748B" text-anchor="middle">HTTPS, cert-manager&#x27;s certificates</text>
+<rect x="576" y="240" width="216" height="48" rx="6" fill="#0F172A" stroke="#E2E8F0" filter="url(#shadow)"/>
+<text x="684.0" y="261.0" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="600">gateway</text>
+<text x="684.0" y="277.0" font-size="10.5" fill="#CBD5E1" text-anchor="middle">nginx: routes, checks sign-ins</text>
+<rect x="36" y="324" width="592" height="334" rx="10" fill="#FFFFFF" stroke="#E2E8F0"/>
+<text x="52" y="348" font-size="9.5" fill="#94A3B8" text-anchor="start" font-weight="700" letter-spacing="0.8">ALWAYS RUN · THE API</text>
+<rect x="52" y="364" width="134" height="44" rx="6" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow)"/>
+<rect x="52" y="372" width="3" height="28" rx="1.5" fill="#2563EB"/>
+<text x="120.0" y="383" font-size="11" fill="#0F172A" text-anchor="middle" font-weight="600">actor-service</text>
+<text x="120.0" y="398" font-size="10" fill="#64748B" text-anchor="middle">people</text>
+<rect x="194" y="364" width="134" height="44" rx="6" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow)"/>
+<rect x="194" y="372" width="3" height="28" rx="1.5" fill="#2563EB"/>
+<text x="262.0" y="383" font-size="11" fill="#0F172A" text-anchor="middle" font-weight="600">text-service</text>
+<text x="262.0" y="398" font-size="10" fill="#64748B" text-anchor="middle">notes</text>
+<rect x="336" y="364" width="134" height="44" rx="6" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow)"/>
+<rect x="336" y="372" width="3" height="28" rx="1.5" fill="#2563EB"/>
+<text x="404.0" y="383" font-size="11" fill="#0F172A" text-anchor="middle" font-weight="600">photo-service</text>
+<text x="404.0" y="398" font-size="10" fill="#64748B" text-anchor="middle">photos</text>
+<rect x="478" y="364" width="134" height="44" rx="6" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow)"/>
+<rect x="478" y="372" width="3" height="28" rx="1.5" fill="#2563EB"/>
+<text x="546.0" y="383" font-size="11" fill="#0F172A" text-anchor="middle" font-weight="600">identity-image-service</text>
+<text x="546.0" y="398" font-size="10" fill="#64748B" text-anchor="middle">profile and cover photos</text>
+<rect x="52" y="416" width="134" height="44" rx="6" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow)"/>
+<rect x="52" y="424" width="3" height="28" rx="1.5" fill="#7C3AED"/>
+<text x="120.0" y="435" font-size="11" fill="#0F172A" text-anchor="middle" font-weight="600">feed-service</text>
+<text x="120.0" y="450" font-size="10" fill="#64748B" text-anchor="middle">feeds, reposts</text>
+<rect x="194" y="416" width="134" height="44" rx="6" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow)"/>
+<rect x="194" y="424" width="3" height="28" rx="1.5" fill="#7C3AED"/>
+<text x="262.0" y="435" font-size="11" fill="#0F172A" text-anchor="middle" font-weight="600">socialgraph-service</text>
+<text x="262.0" y="450" font-size="10" fill="#64748B" text-anchor="middle">follows, blocks, mutes</text>
+<rect x="336" y="416" width="134" height="44" rx="6" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow)"/>
+<rect x="336" y="424" width="3" height="28" rx="1.5" fill="#7C3AED"/>
+<text x="404.0" y="435" font-size="11" fill="#0F172A" text-anchor="middle" font-weight="600">like-service</text>
+<text x="404.0" y="450" font-size="10" fill="#64748B" text-anchor="middle">likes</text>
+<rect x="478" y="416" width="134" height="44" rx="6" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow)"/>
+<rect x="478" y="424" width="3" height="28" rx="1.5" fill="#7C3AED"/>
+<text x="546.0" y="435" font-size="11" fill="#0F172A" text-anchor="middle" font-weight="600">notification-service</text>
+<text x="546.0" y="450" font-size="10" fill="#64748B" text-anchor="middle">notifications</text>
+<rect x="52" y="468" width="134" height="44" rx="6" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow)"/>
+<rect x="52" y="476" width="3" height="28" rx="1.5" fill="#0D9488"/>
+<text x="120.0" y="487" font-size="11" fill="#0F172A" text-anchor="middle" font-weight="600">search-service</text>
+<text x="120.0" y="502" font-size="10" fill="#64748B" text-anchor="middle">search</text>
+<rect x="194" y="468" width="134" height="44" rx="6" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow)"/>
+<rect x="194" y="476" width="3" height="28" rx="1.5" fill="#0D9488"/>
+<text x="262.0" y="487" font-size="11" fill="#0F172A" text-anchor="middle" font-weight="600">hashtag-service</text>
+<text x="262.0" y="502" font-size="10" fill="#64748B" text-anchor="middle">hashtags</text>
+<rect x="336" y="468" width="134" height="44" rx="6" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow)"/>
+<rect x="336" y="476" width="3" height="28" rx="1.5" fill="#0D9488"/>
+<text x="404.0" y="487" font-size="11" fill="#0F172A" text-anchor="middle" font-weight="600">location-service</text>
+<text x="404.0" y="502" font-size="10" fill="#64748B" text-anchor="middle">locations, maps</text>
+<rect x="52" y="520" width="134" height="44" rx="6" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow)"/>
+<rect x="52" y="528" width="3" height="28" rx="1.5" fill="#EA580C"/>
+<text x="120.0" y="539" font-size="11" fill="#0F172A" text-anchor="middle" font-weight="600">auth-service</text>
+<text x="120.0" y="554" font-size="10" fill="#64748B" text-anchor="middle">sign-in, accounts</text>
+<rect x="194" y="520" width="134" height="44" rx="6" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow)"/>
+<rect x="194" y="528" width="3" height="28" rx="1.5" fill="#EA580C"/>
+<text x="262.0" y="539" font-size="11" fill="#0F172A" text-anchor="middle" font-weight="600">abuse-report-service</text>
+<text x="262.0" y="554" font-size="10" fill="#64748B" text-anchor="middle">reports</text>
+<text x="52" y="586" font-size="9.5" fill="#94A3B8" text-anchor="start" font-weight="700" letter-spacing="0.8">SHARED BY THE OTHERS, OVER GRPC</text>
+<rect x="52" y="598" width="181" height="44" rx="6" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow)"/>
+<rect x="52" y="606" width="3" height="28" rx="1.5" fill="#CA8A04"/>
+<text x="143.5" y="617" font-size="11" fill="#0F172A" text-anchor="middle" font-weight="600">graph-grpc-service</text>
+<text x="143.5" y="632" font-size="10" fill="#64748B" text-anchor="middle">the graph</text>
+<rect x="241" y="598" width="181" height="44" rx="6" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow)"/>
+<rect x="241" y="606" width="3" height="28" rx="1.5" fill="#CA8A04"/>
+<text x="332.5" y="617" font-size="11" fill="#0F172A" text-anchor="middle" font-weight="600">file-grpc-service</text>
+<text x="332.5" y="632" font-size="10" fill="#64748B" text-anchor="middle">files</text>
+<rect x="430" y="598" width="181" height="44" rx="6" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow)"/>
+<rect x="430" y="606" width="3" height="28" rx="1.5" fill="#CA8A04"/>
+<text x="521.5" y="617" font-size="11" fill="#0F172A" text-anchor="middle" font-weight="600">mail-grpc-service</text>
+<text x="521.5" y="632" font-size="10" fill="#64748B" text-anchor="middle">email</text>
+<rect x="644" y="324" width="280" height="422" rx="10" fill="#FFFFFF" stroke="#E2E8F0"/>
+<text x="660" y="348" font-size="9.5" fill="#94A3B8" text-anchor="start" font-weight="700" letter-spacing="0.8">ONLY IF THE SITE OFFERS IT</text>
+<rect x="660" y="364" width="248" height="42" rx="6" fill="#FFFFFF" stroke="#94A3B8" stroke-dasharray="4 3"/>
+<circle cx="674" cy="378.0" r="3.5" fill="#C026D3"/>
+<text x="684" y="382.0" font-size="12" fill="#0F172A" text-anchor="start" font-weight="600">The fediverse</text>
+<text x="684" y="398.0" font-size="10.5" fill="#64748B" text-anchor="start">activitypub-service</text>
+<rect x="660" y="414" width="248" height="42" rx="6" fill="#FFFFFF" stroke="#94A3B8" stroke-dasharray="4 3"/>
+<circle cx="674" cy="428.0" r="3.5" fill="#C026D3"/>
+<text x="684" y="432.0" font-size="12" fill="#0F172A" text-anchor="start" font-weight="600">Bluesky and the Atmosphere</text>
+<text x="684" y="448.0" font-size="10.5" fill="#64748B" text-anchor="start">atproto-service</text>
+<rect x="660" y="464" width="248" height="42" rx="6" fill="#FFFFFF" stroke="#94A3B8" stroke-dasharray="4 3"/>
+<circle cx="674" cy="478.0" r="3.5" fill="#C026D3"/>
+<text x="684" y="482.0" font-size="12" fill="#0F172A" text-anchor="start" font-weight="600">Cards for links</text>
+<text x="684" y="498.0" font-size="10.5" fill="#64748B" text-anchor="start">link-preview-service</text>
+<rect x="660" y="514" width="248" height="42" rx="6" fill="#FFFFFF" stroke="#94A3B8" stroke-dasharray="4 3"/>
+<circle cx="674" cy="528.0" r="3.5" fill="#C026D3"/>
+<text x="684" y="532.0" font-size="12" fill="#0F172A" text-anchor="start" font-weight="600">Who to follow</text>
+<text x="684" y="548.0" font-size="10.5" fill="#64748B" text-anchor="start">recommendation-service</text>
+<rect x="660" y="564" width="248" height="42" rx="6" fill="#FFFFFF" stroke="#94A3B8" stroke-dasharray="4 3"/>
+<circle cx="674" cy="578.0" r="3.5" fill="#C026D3"/>
+<text x="684" y="582.0" font-size="12" fill="#0F172A" text-anchor="start" font-weight="600">Downloads and imports</text>
+<text x="684" y="598.0" font-size="10.5" fill="#64748B" text-anchor="start">import-export-service, import-export-worker</text>
+<text x="660" y="628" font-size="9.5" fill="#94A3B8" text-anchor="start" font-weight="700" letter-spacing="0.8">NOT RUN HERE</text>
+<rect x="660" y="640" width="248" height="42" rx="6" fill="#EEF2F7" stroke="#94A3B8" stroke-dasharray="4 3"/>
+<circle cx="674" cy="654.0" r="3" fill="none" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="684" y="658.0" font-size="12" fill="#94A3B8" text-anchor="start" font-weight="600">Videos, GIFs and sound</text>
+<text x="684" y="674.0" font-size="10.5" fill="#94A3B8" text-anchor="start">video-service, video-worker</text>
+<rect x="660" y="690" width="248" height="42" rx="6" fill="#EEF2F7" stroke="#94A3B8" stroke-dasharray="4 3"/>
+<circle cx="674" cy="704.0" r="3" fill="none" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="684" y="708.0" font-size="12" fill="#94A3B8" text-anchor="start" font-weight="600">Websites&#x27; feeds</text>
+<text x="684" y="724.0" font-size="10.5" fill="#94A3B8" text-anchor="start">syndication-service, syndication-worker</text>
+<text x="52" y="778" font-size="9.5" fill="#94A3B8" text-anchor="start" font-weight="700" letter-spacing="0.8">KEPT</text>
+<rect x="52" y="790" width="140" height="44" rx="6" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow)"/>
+<circle cx="66" cy="805.0" r="3.5" fill="#00758F"/>
+<text x="76" y="809.0" font-size="12" fill="#0F172A" text-anchor="start" font-weight="600">MySQL</text>
+<text x="76" y="825.0" font-size="10.5" fill="#64748B" text-anchor="start">everything kept</text>
+<rect x="200" y="790" width="140" height="44" rx="6" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow)"/>
+<circle cx="214" cy="805.0" r="3.5" fill="#DC2626"/>
+<text x="224" y="809.0" font-size="12" fill="#0F172A" text-anchor="start" font-weight="600">Redis</text>
+<text x="224" y="825.0" font-size="10.5" fill="#64748B" text-anchor="start">sessions</text>
+<rect x="348" y="790" width="140" height="44" rx="6" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow)"/>
+<circle cx="362" cy="805.0" r="3.5" fill="#F97316"/>
+<text x="372" y="809.0" font-size="12" fill="#0F172A" text-anchor="start" font-weight="600">RabbitMQ</text>
+<text x="372" y="825.0" font-size="10.5" fill="#64748B" text-anchor="start">the services&#x27; events</text>
+<rect x="496" y="790" width="140" height="44" rx="6" fill="#FFFFFF" stroke="#94A3B8" stroke-dasharray="4 3"/>
+<circle cx="510" cy="805.0" r="3.5" fill="#0D9488"/>
+<text x="520" y="809.0" font-size="12" fill="#0F172A" text-anchor="start" font-weight="600">Garage</text>
+<text x="520" y="825.0" font-size="10.5" fill="#64748B" text-anchor="start">files, or a store outside</text>
+<text x="52" y="862" font-size="9.5" fill="#94A3B8" text-anchor="start" font-weight="700" letter-spacing="0.8">BY THE CLOCK, AND ONCE</text>
+<rect x="52" y="874" width="212" height="36" rx="6" fill="#FFFFFF" stroke="#94A3B8" stroke-dasharray="4 3"/>
+<text x="158" y="896" font-size="11.5" fill="#0F172A" text-anchor="middle">migration-job: at each version</text>
+<rect x="272" y="874" width="212" height="36" rx="6" fill="#FFFFFF" stroke="#94A3B8" stroke-dasharray="4 3"/>
+<text x="378" y="896" font-size="11.5" fill="#0F172A" text-anchor="middle">account-sweeper: every 10 min</text>
+<rect x="492" y="874" width="212" height="36" rx="6" fill="#FFFFFF" stroke="#94A3B8" stroke-dasharray="4 3"/>
+<text x="598" y="896" font-size="11.5" fill="#0F172A" text-anchor="middle">file-sweeper: nightly</text>
+<rect x="712" y="874" width="212" height="36" rx="6" fill="#FFFFFF" stroke="#94A3B8" stroke-dasharray="4 3"/>
+<text x="818" y="896" font-size="11.5" fill="#0F172A" text-anchor="middle">mysql-backup: nightly</text>
+<path d="M160 930 L160 966" stroke="#94A3B8" stroke-width="1.6" fill="none" stroke-dasharray="4 3" marker-end="url(#out)"/>
+<path d="M480 930 L480 966" stroke="#94A3B8" stroke-width="1.6" fill="none" stroke-dasharray="4 3" marker-end="url(#out)"/>
+<path d="M800 930 L800 966" stroke="#94A3B8" stroke-width="1.6" fill="none" stroke-dasharray="4 3" marker-end="url(#out)"/>
+<rect x="60" y="970" width="200" height="52" rx="6" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow)"/>
+<text x="160.0" y="993.0" font-size="12" fill="#0F172A" text-anchor="middle" font-weight="600">Mail provider</text>
+<text x="160.0" y="1009.0" font-size="10.5" fill="#64748B" text-anchor="middle">SMTP: sign-in codes, notices</text>
+<rect x="380" y="970" width="200" height="52" rx="6" fill="#FFFFFF" stroke="#94A3B8" stroke-dasharray="4 3"/>
+<text x="480.0" y="993.0" font-size="12" fill="#0F172A" text-anchor="middle" font-weight="600">Object store</text>
+<text x="480.0" y="1009.0" font-size="10.5" fill="#64748B" text-anchor="middle">S3: files, if not Garage</text>
+<rect x="700" y="970" width="200" height="52" rx="6" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow)"/>
+<text x="800.0" y="993.0" font-size="12" fill="#0F172A" text-anchor="middle" font-weight="600">DNS</text>
+<text x="800.0" y="1009.0" font-size="10.5" fill="#64748B" text-anchor="middle">the site&#x27;s names</text>
+</svg>

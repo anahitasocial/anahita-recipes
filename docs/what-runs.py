@@ -54,6 +54,7 @@ RECIPES = {
     "journal": SOCIAL,
     "theatre": ["video"] + SOCIAL,
     "gathering": SOCIAL,
+    "gallery": SOCIAL,
 }
 
 # The colours: slate for the frame and the words, one colour for each kind

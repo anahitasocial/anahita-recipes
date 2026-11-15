@@ -1,0 +1,17 @@
+# MySQL kept small for a server of 4 GB: a 256 MB buffer pool, plenty for a
+# new site's database, and no performance schema, which would take some
+# 200 MB to watch itself. Raise the pool as the database grows. The first
+# argument is the component's own, kept.
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql
+spec:
+  template:
+    spec:
+      containers:
+        - name: mysql
+          args:
+            - --group_concat_max_len=64000
+            - --innodb_buffer_pool_size=256M
+            - --performance_schema=OFF
