@@ -2,7 +2,7 @@
 
 Photos, and the words that go with them: people and their photo posts, and
 the replies under them. No posts of words alone, as on Pixelfed or Flickr:
-no notes, articles or topics, no groups, events or websites, and no
+no notes, articles or topics, no groups, events or channels, and no
 videos, GIFs or sound. For photographers, a camera club, an art school or
 a town that shows itself in pictures, with federation on ActivityPub and
 AT Protocol, so that people on Pixelfed, Mastodon, Bluesky and the rest of
@@ -41,7 +41,7 @@ place.
 
 | Setting | gallery chooses | Why |
 | --- | --- | --- |
-| `instance.json` | People; photos, and replies | What a gallery is for, as on Pixelfed: each person's own photos, and the conversation under them. Notes, articles, topics, groups, events and websites are in no menu, composer or tab, and the services refuse them |
+| `instance.json` | People; photos, and replies | What a gallery is for, as on Pixelfed: each person's own photos, and the conversation under them. Notes, articles, topics, groups, events and channels are in no menu, composer or tab, and the services refuse them |
 | `REGISTRATION_MODE` | `approval` | Anybody may ask to join, and an administrator says yes, so that a new site is not filled by strangers before its rules are written |
 | `SITE_READ_ACCESS` | `public` | What is public may be read by anybody, as on Mastodon |
 | `FEDERATION_PROTOCOLS` | `activitypub,atproto` | Both networks. Each profile still chooses whether it federates |
@@ -56,7 +56,7 @@ server, at the version named in [k8s/kustomization.yml](k8s/kustomization.yml).
 ![One server running k3s. Traefik takes every request and hands it to the
 gateway, or to web-shell for the web app. Twelve services always run, with
 three shared over gRPC; six others, dashed, run because a gallery offers
-what they bring. Video and websites' feeds are not run. MySQL, Redis,
+what they bring. Video and channels' website feeds are not run. MySQL, Redis,
 RabbitMQ and Garage keep the data, and four jobs run by the clock or once.](images/what-runs.svg)
 
 Anahita is small services, each doing one thing, so a site runs only what

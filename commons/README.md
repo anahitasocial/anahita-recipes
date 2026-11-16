@@ -54,7 +54,7 @@ if not Garage, and DNS.](images/what-runs.svg)
 Anahita is small services, each doing one thing, so a site runs only what
 it offers. The solid ones are the site itself. Each dashed one brings one
 thing a site can go without, and is left out by a recipe that does not
-offer it: no photo posts, no videos, no Bluesky, no websites' feeds.
+offer it: no photo posts, no videos, no Bluesky, no channels' website feeds.
 `commons` offers everything, so it runs them all. What a site offers is
 said in one file, `instance.json`, and the web app and the services follow
 it: see `coffeehouse`, and anahita-services' `docs/instance-features.md`.
@@ -67,13 +67,13 @@ it: see `coffeehouse`, and anahita-services' `docs/instance-features.md`.
 | --- | --- |
 | `web-shell` | Serves the web app, each page with its own title and picture, so that a shared link shows as itself. |
 | `auth-service` | Signing in and signing up, and the accounts people sign in with. |
-| `actor-service` | Every kind of profile it offers: people, groups, events and websites. |
+| `actor-service` | Every kind of profile it offers: people, groups, events and channels. |
 | `text-service` | Notes, articles and topics, and the replies to any post. |
 | `feed-service` | The chronological feed, reposts, and the custom feeds people make. |
 | `socialgraph-service` | Who follows, blocks, mutes and subscribes to whom. |
 | `like-service` | Likes. |
 | `notification-service` | Notifications in the app. |
-| `search-service` | Search for people, groups, events, websites, posts and shared feeds. |
+| `search-service` | Search for people, groups, events, channels, posts and shared feeds. |
 | `hashtag-service` | Hashtags. |
 | `location-service` | The locations posts are tagged with, and finding them on a map. |
 | `identity-image-service` | Profile and cover photos, made afresh at each size. |
@@ -85,7 +85,7 @@ it: see `coffeehouse`, and anahita-services' `docs/instance-features.md`.
 | `video-service`, `video-worker` | Video, GIF and audio posts; video-worker makes each ready for every screen. |
 | `activitypub-service` | Makes the site a server of the fediverse, for the people who choose to be found there. |
 | `atproto-service` | Bluesky and the rest of the Atmosphere: following profiles there, and posting there for whoever connects their own account. |
-| `syndication-service`, `syndication-worker` | Following a website's feed like a profile; syndication-worker reads every feed and posts what is new. |
+| `syndication-service`, `syndication-worker` | A channel's website feed, connected in its settings; syndication-worker reads every feed and posts what is new on the channel. |
 | `link-preview-service` | The card under a note that links to a page: its title and picture. |
 | `recommendation-service` | Recommendations of who to follow. |
 | `import-export-service`, `import-export-worker` | A copy of one's own data to download, and a social graph brought in from elsewhere; import-export-worker does each. |

@@ -3,7 +3,7 @@
 Discussions that last: people, the groups that hold them, and topics with
 the replies under them. A group is a board, made by the site's
 administrators; anybody who follows one starts topics in it, and anybody
-may reply. No notes, articles or photo posts, no events or websites, and
+may reply. No notes, articles or photo posts, no events or channels, and
 no videos, GIFs or sound. With federation on ActivityPub and AT Protocol,
 so that people on Mastodon, Bluesky and the rest of the Atmosphere can
 follow and reply. Named after the forum of a Roman town, its square,
@@ -43,7 +43,7 @@ place.
 
 | Setting | forum chooses | Why |
 | --- | --- | --- |
-| `instance.json` | People and groups; topics, and replies | What a forum is for, as on Discourse: boards, and the topics in them. Notes, articles, photo posts, events and websites are in no menu, composer or tab, and the services refuse them |
+| `instance.json` | People and groups; topics, and replies | What a forum is for, as on Discourse: boards, and the topics in them. Notes, articles, photo posts, events and channels are in no menu, composer or tab, and the services refuse them |
 | `GROUPS_FROM` | `administrators` | The site makes its boards, so that it keeps its own shape; `registered` lets everybody make one |
 | `REGISTRATION_MODE` | `approval` | Anybody may ask to join, and an administrator says yes, so that a new site is not filled by strangers before its rules are written |
 | `SITE_READ_ACCESS` | `public` | What is public may be read by anybody, as on Mastodon |
@@ -58,7 +58,7 @@ server, at the version named in [k8s/kustomization.yml](k8s/kustomization.yml).
 ![One server running k3s. Traefik takes every request and hands it to the
 gateway, or to web-shell for the web app. Twelve services always run, with
 three shared over gRPC; five others, dashed, run because a forum offers
-what they bring. Photo posts, video and websites' feeds are not run.
+what they bring. Photo posts, video and channels' website feeds are not run.
 MySQL, Redis, RabbitMQ and Garage keep the data, and four jobs run by the
 clock or once.](images/what-runs.svg)
 

@@ -1,5 +1,5 @@
 # What a forum does not offer is not run: photo posts (photo-service),
-# videos and sound (video-service, video-worker) and websites' feeds
+# videos and sound (video-service, video-worker) and channels' website feeds
 # (syndication-service, syndication-worker). At no replicas, their Services
 # stay, so the gateway, which names them, starts as ever. To put one back,
 # take it out of here.

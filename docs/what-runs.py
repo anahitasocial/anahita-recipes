@@ -41,7 +41,7 @@ OPTIONAL = {
     "video": ("Videos, GIFs and sound", "video-service, video-worker"),
     "fediverse": ("The fediverse", "activitypub-service"),
     "atmosphere": ("Bluesky and the Atmosphere", "atproto-service"),
-    "websites": ("Websites' feeds", "syndication-service, syndication-worker"),
+    "feeds": ("Channels' website feeds", "syndication-service, syndication-worker"),
     "cards": ("Cards for links", "link-preview-service"),
     "follow": ("Who to follow", "recommendation-service"),
     "data": ("Downloads and imports", "import-export-service, import-export-worker"),
@@ -94,7 +94,7 @@ JOBS = ["migration-job: at each version", "account-sweeper: every 10 min",
 # Each recipe's own words for what the services that make profiles and
 # posts give, from its k8s/instance.json: no file is everything, as on a
 # site (anahita-services' docs/instance-features.md).
-PROFILES = [("person", "people"), ("group", "groups"), ("event", "events"), ("website", "websites")]
+PROFILES = [("person", "people"), ("group", "groups"), ("event", "events"), ("channel", "channels")]
 POSTS = {"text-service": [("note", "notes"), ("article", "articles"), ("topic", "topics")]}
 # What each service's posts are called, for a sentence.
 POSTS_ARE = {"text-service": "Its posts"}
@@ -380,7 +380,7 @@ def draw(recipe, offered):
 # diagram in each recipe's README.
 SAYS = {
     "auth-service": "Signing in and signing up, and the accounts people sign in with.",
-    "actor-service": "Every kind of profile: people, groups and events, and the profiles of websites.",
+    "actor-service": "Every kind of profile: people, groups, events and channels.",
     "text-service": "Notes, articles and topics, and the replies to any post.",
     "feed-service": "The chronological feed, reposts, and the custom feeds people make.",
     "socialgraph-service": "Who follows, blocks, mutes and subscribes to whom.",
@@ -399,7 +399,7 @@ SAYS = {
     "video": "Video, GIF and audio posts; video-worker makes each ready for every screen.",
     "fediverse": "Makes the site a server of the fediverse, for the people who choose to be found there.",
     "atmosphere": "Bluesky and the rest of the Atmosphere: following profiles there, and posting there for whoever connects their own account.",
-    "websites": "Following a website's feed like a profile; syndication-worker reads every feed and posts what is new.",
+    "feeds": "A channel's website feed, connected in its settings; syndication-worker reads every feed and posts what is new on the channel.",
     "cards": "The card under a note that links to a page: its title and picture.",
     "follow": "Recommendations of who to follow.",
     "data": "A copy of one's own data to download, and a social graph brought in from elsewhere; import-export-worker does each.",

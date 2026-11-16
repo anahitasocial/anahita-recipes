@@ -1,4 +1,4 @@
-# What a gathering does not offer is not run: videos and sound and websites' feeds
+# What a gathering does not offer is not run: videos and sound and channels' website feeds
 # (video-service, video-worker, syndication-service, syndication-worker). At no replicas, their Services
 # stay, so the gateway, which names them, starts as ever. To put one back,
 # take it out of here.

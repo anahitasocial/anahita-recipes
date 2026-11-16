@@ -5,7 +5,7 @@ beside it for what does not need an article, and photos. Each person
 writes under their own name, as on Medium or WordPress.com. Newsrooms
 and schools will have recipes of their own; until then, one that
 publishes together, in groups, can begin with [`commons`](../commons).
-No groups, topics, events or websites, and no videos, GIFs or sound. With
+No groups, topics, events or channels, and no videos, GIFs or sound. With
 federation on ActivityPub and AT Protocol, so that people on Mastodon,
 Pixelfed, Bluesky and the rest of the Atmosphere can follow and reply. A
 journal is written over time and kept, and old and useful articles are
@@ -44,7 +44,7 @@ place.
 
 | Setting | journal chooses | Why |
 | --- | --- | --- |
-| `instance.json` | People; notes, articles and photos | What a journal is for, as on Medium or WordPress.com: writers, not groups. Groups, topics, events and websites are in no menu, composer or tab, and the services refuse them |
+| `instance.json` | People; notes, articles and photos | What a journal is for, as on Medium or WordPress.com: writers, not groups. Groups, topics, events and channels are in no menu, composer or tab, and the services refuse them |
 | `REGISTRATION_MODE` | `approval` | Anybody may ask to join, and an administrator says yes, so that a new site is not filled by strangers before its rules are written |
 | `SITE_READ_ACCESS` | `public` | What is public may be read by anybody, as on Mastodon |
 | `FEDERATION_PROTOCOLS` | `activitypub,atproto` | Both networks. Each profile still chooses whether it federates |
@@ -58,7 +58,7 @@ server, at the version named in [k8s/kustomization.yml](k8s/kustomization.yml).
 ![One server running k3s. Traefik takes every request and hands it to the
 gateway, or to web-shell for the web app. Twelve services always run, with
 three shared over gRPC; six others, dashed, run because a journal offers
-what they bring. Video and websites' feeds are not run. MySQL, Redis,
+what they bring. Video and channels' website feeds are not run. MySQL, Redis,
 RabbitMQ and Garage keep the data, and four jobs run by the clock or once.](images/what-runs.svg)
 
 Anahita is small services, each doing one thing, so a site runs only what

@@ -19,7 +19,7 @@ no knowledge of Kubernetes to follow one.
 | [**coffeehouse**](coffeehouse) | Short posts and the conversation around them: people, their notes and photos | Mastodon, Bluesky |
 | [**gallery**](gallery) | Photos, and the words that go with them: people and their photo posts, and the replies under them | Pixelfed, Instagram |
 | [**journal**](journal) | Long writing: articles, with notes and photos beside them | WordPress, Medium |
-| [**theatre**](theatre) | Video and sound: lectures, music, a channel of your own | YouTube, PeerTube |
+| [**theatre**](theatre) | Video and sound: lectures, music, each person's own | YouTube, PeerTube |
 | [**gathering**](gathering) | Meetups and events, with groups to host them | Meetup, Luma |
 | [**forum**](forum) | Discussions that last: groups as boards, topics in them and the replies under them | Discourse, NodeBB |
 | [**php-migration**](php-migration) | Moving an Anahita PHP site into a new commons site | |

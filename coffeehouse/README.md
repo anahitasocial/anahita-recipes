@@ -1,7 +1,7 @@
 # coffeehouse
 
 Short posts and the conversation around them: people, their notes and
-their photos, as on Mastodon or Bluesky. No groups, events or websites, no
+their photos, as on Mastodon or Bluesky. No groups, events or channels, no
 articles or topics, and no videos, GIFs or sound. For a town, a club or a
 field that wants to talk, not publish, with federation on ActivityPub and
 AT Protocol, so that people on Mastodon, Pixelfed, Bluesky and the rest of
@@ -37,7 +37,7 @@ place.
 
 | Setting | coffeehouse chooses | Why |
 | --- | --- | --- |
-| `instance.json` | People; notes and photos | What a coffeehouse is for, as on Mastodon or Bluesky. Groups, events, websites, articles and topics are in no menu, composer or tab, and the services refuse them |
+| `instance.json` | People; notes and photos | What a coffeehouse is for, as on Mastodon or Bluesky. Groups, events, channels, articles and topics are in no menu, composer or tab, and the services refuse them |
 | `REGISTRATION_MODE` | `approval` | Anybody may ask to join, and an administrator says yes, so that a new site is not filled by strangers before its rules are written |
 | `SITE_READ_ACCESS` | `public` | What is public may be read by anybody, as on Mastodon |
 | `FEDERATION_PROTOCOLS` | `activitypub,atproto` | Both networks. Each profile still chooses whether it federates |
@@ -51,7 +51,7 @@ server, at the version named in [k8s/kustomization.yml](k8s/kustomization.yml).
 ![One server running k3s. Traefik takes every request and hands it to the
 gateway, or to web-shell for the web app. Twelve services always run, with
 three shared over gRPC; six others, dashed, run because a coffeehouse
-offers what they bring. Video and websites' feeds are not run. MySQL,
+offers what they bring. Video and channels' website feeds are not run. MySQL,
 Redis, RabbitMQ and Garage keep the data, and four jobs run by the clock
 or once.](images/what-runs.svg)
 

@@ -1,9 +1,10 @@
 # theatre
 
-Video sharing, on a channel of your own: arts, music, news and lectures.
+Video sharing, each person's own: arts, music, news and lectures.
 Videos of up to an hour, sound for music and talks, and the replies under
-them. Each person is a channel. No posts of words alone (notes, articles or
-topics), no photo posts, and no groups, events or websites.
+them. Each person's profile is where their videos are. No posts of words
+alone (notes, articles or topics), no photo posts, and no groups, events
+or channels.
 With federation on ActivityPub and AT Protocol, so that people on
 Mastodon, Pixelfed, Bluesky and the rest of the Atmosphere can follow,
 watch and reply.
@@ -41,7 +42,7 @@ place.
 
 | Setting | theatre chooses | Why |
 | --- | --- | --- |
-| `instance.json` | People; videos and sound, and replies | What a theatre is for, as on YouTube: channels, not groups. Groups, events, websites, articles, topics and photo posts are in no menu, composer or tab, and the services refuse them |
+| `instance.json` | People; videos and sound, and replies | What a theatre is for, as on YouTube: each person's videos on their own profile, not groups. Groups, events, channels, articles, topics and photo posts are in no menu, composer or tab, and the services refuse them |
 | `REGISTRATION_MODE` | `approval` | Anybody may ask to join, and an administrator says yes, so that a new site is not filled by strangers before its rules are written |
 | `SITE_READ_ACCESS` | `public` | What is public may be read by anybody, as on Mastodon |
 | `FEDERATION_PROTOCOLS` | `activitypub,atproto` | Both networks. Each profile still chooses whether it federates |
@@ -55,7 +56,7 @@ server, at the version named in [k8s/kustomization.yml](k8s/kustomization.yml).
 ![One server running k3s. Traefik takes every request and hands it to the
 gateway, or to web-shell for the web app. Twelve services always run, with
 three shared over gRPC; six others, dashed, run because a theatre offers
-what they bring. Photo posts and websites' feeds are not run. MySQL,
+what they bring. Photo posts and channels' website feeds are not run. MySQL,
 Redis, RabbitMQ and Garage keep the data, and four jobs run by the clock
 or once.](images/what-runs.svg)
 
