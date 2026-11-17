@@ -21,7 +21,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        recipe: [commons, coffeehouse, journal, theatre, gathering, gallery, forum, neighbourhood]
+        recipe: [classique, cafe, journal, galerie, videotheque, rendez-vous, forum, quartier]
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:

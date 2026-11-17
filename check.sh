@@ -4,7 +4,7 @@
 #   1. It builds: kubectl kustomize on its k8s/, with the example secrets.
 #   2. Every setting it names exists, in anahita-services'
 #      docs/configuration.md at the version the recipe runs, or on main.
-#   3. What the recipes share is the same in each as in commons: the
+#   3. What the recipes share is the same in each as in classique: the
 #      Makefile, scripts/, deploy/, and web/'s two scripts.
 #
 #   ./check.sh
@@ -46,10 +46,10 @@ for recipe in */; do
     if [ -n "$missing" ]; then fail "not in configuration.md at $version nor on main:$missing"; else echo "  every setting is in configuration.md"; fi
   fi
 
-  # 3. The shared files, the same as commons'.
-  if [ "$recipe" != commons ]; then
+  # 3. The shared files, the same as classique's.
+  if [ "$recipe" != classique ]; then
     for path in $SHARED; do
-      diff -rq "commons/$path" "$recipe/$path" > /dev/null 2>&1 || fail "$path differs from commons'"
+      diff -rq "classique/$path" "$recipe/$path" > /dev/null 2>&1 || fail "$path differs from classique's"
     done
   fi
 done

@@ -15,7 +15,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 
 # Run by every recipe, by name, with what each gives, short enough for a
-# box. The sentence for each is in commons/README.md, under the diagram.
+# box. The sentence for each is in classique/README.md, under the diagram.
 ALWAYS = [
     ("auth-service", "sign-in, accounts"),
     ("actor-service", "people, groups, events"),
@@ -49,15 +49,17 @@ OPTIONAL = {
 EVERYTHING = list(OPTIONAL)
 SOCIAL = ["fediverse", "atmosphere", "cards", "follow", "data"]
 RECIPES = {
-    "commons": EVERYTHING,
-    "coffeehouse": ["photos"] + SOCIAL,
+    "classique": EVERYTHING,
+    "cafe": ["photos"] + SOCIAL,
     "journal": ["photos"] + SOCIAL,
-    "theatre": ["video"] + SOCIAL,
-    "gathering": ["photos"] + SOCIAL,
-    "gallery": ["photos"] + SOCIAL,
+    "galerie": ["photos"] + SOCIAL,
+    "videotheque": ["video"] + SOCIAL,
+    "rendez-vous": ["photos"] + SOCIAL,
     "forum": SOCIAL,
-    "neighbourhood": EVERYTHING,
+    "quartier": EVERYTHING,
 }
+# A recipe's name as it is written, where its folder drops the accents.
+NAMES = {"cafe": "café", "videotheque": "vidéothèque"}
 
 # The colours: slate for the frame and the words, one colour for each kind
 # of service, so that what goes together is seen together.
@@ -154,8 +156,12 @@ def always_for(recipe):
     return [(name, gives.get(name, line)) for name, line in ALWAYS], says
 
 
+def written(recipe):
+    return NAMES.get(recipe, recipe)
+
+
 def article(recipe):
-    return "an " + recipe if recipe[0] in "aeiou" else "a " + recipe
+    return "an " + written(recipe) if recipe[0] in "aeiou" else "a " + written(recipe)
 
 
 def text(x, y, words, size=13, color=INK, anchor="middle", weight=None, spacing=None):
@@ -283,7 +289,7 @@ def draw(recipe, offered):
 
     out.append(f'<rect width="960" height="{height}" rx="16" fill="{PAGE}"/>')
     out.append(text(32, 50, f"What runs on {article(recipe)} server", 22, INK, "start", "700"))
-    out.append(text(32, 72, f"The {recipe} recipe · Anahita {version(recipe)} · each box a pod", 12, MUTED, "start"))
+    out.append(text(32, 72, f"The {written(recipe)} recipe · Anahita {version(recipe)} · each box a pod", 12, MUTED, "start"))
 
     # What the colours mean.
     out.append(f'<rect x="560" y="20" width="376" height="72" rx="8" fill="{CARD}" stroke="{BORDER}"/>')

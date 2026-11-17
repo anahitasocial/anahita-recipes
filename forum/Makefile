@@ -1,4 +1,4 @@
-# The commons recipe's tasks, each one word. `make` alone lists them.
+# The recipe's tasks, each one word. `make` alone lists them.
 #
 # The site's own values are in site.env, which `make init` writes. Every
 # kubectl names the site's own kubeconfig and context, never the default

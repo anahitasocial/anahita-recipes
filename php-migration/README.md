@@ -3,7 +3,7 @@
 Moving a site from Anahita PHP to today's Anahita, the way banu.io was
 moved in October 2026, then thinning what years have left in it.
 
-It holds the move alone. The new site is a [`commons`](../commons) site:
+It holds the move alone. The new site is a [`classique`](../classique) site:
 make it first, following its README as far as `make apply`, and this
 recipe moves the old site into it.
 
@@ -36,17 +36,17 @@ If anything goes wrong open an [issue](https://github.com/anahitasocial/anahita-
 
 ## What you need
 
-1. **A `commons` site,** made as its README says, as far as `make apply`,
+1. **A `classique` site,** made as its README says, as far as `make apply`,
    with its tunnel open (`make tunnel`, in its folder).
 2. **The old site's database,** as a dump: `mysqldump --single-transaction
    <database> | gzip > old-site.sql.gz` on the old server.
 3. **The old site's files:** the folder that holds its `assets/`, copied
    here, from the old server (`rsync`) or from its bucket (`aws s3 sync
    s3://<bucket>/assets ./old-files/assets`).
-4. **On your computer,** besides what `commons` needs: Python 3, and Go,
+4. **On your computer,** besides what `classique` needs: Python 3, and Go,
    which runs anahita-services' tool for the files.
 
-If the new site's folder is not `../commons`, name it on each task:
+If the new site's folder is not `../classique`, name it on each task:
 `SITE=<folder>`.
 
 ## The move

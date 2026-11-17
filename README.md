@@ -13,17 +13,20 @@ no knowledge of Kubernetes to follow one.
 
 ## Choose a recipe
 
+Their names are French, as recipes' often are, and as Canada, where
+Anahita is made, speaks it beside English.
+
 | Recipe | For | Like |
 | --- | --- | --- |
-| [**commons**](commons) | A social network with everything: notes, photos, videos, articles, groups and events. The one to begin with | Mastodon and Pixelfed, but more |
-| [**coffeehouse**](coffeehouse) | Short posts and the conversation around them: people, their notes and photos | Mastodon, Bluesky |
-| [**gallery**](gallery) | Photos, and the words that go with them: people and their photo posts, and the replies under them | Pixelfed, Instagram |
+| [**classique**](classique) | A social network with everything: notes, photos, videos, articles, groups and events. The one to begin with | Mastodon and Pixelfed, but more |
+| [**café**](cafe) | Short posts and the conversation around them: people, their notes and photos | Mastodon, Bluesky |
 | [**journal**](journal) | Long writing: articles, with notes and photos beside them | WordPress, Medium |
-| [**theatre**](theatre) | Video and sound: lectures, music, each person's own | YouTube, PeerTube |
-| [**gathering**](gathering) | Meetups and events, with groups to host them | Meetup, Luma |
+| [**galerie**](galerie) | Photos, and the words that go with them: people and their photo posts, and the replies under them | Pixelfed, Instagram |
+| [**vidéothèque**](videotheque) | Video and sound: lectures, music, each person's own | YouTube, PeerTube |
+| [**rendez-vous**](rendez-vous) | Meetups and events, with groups to host them | Meetup, Luma |
 | [**forum**](forum) | Discussions that last: groups as boards, topics in them and the replies under them | Discourse, NodeBB |
-| [**neighbourhood**](neighbourhood) | A neighbourhood's own: its people, and a channel for each clinic, library, shop, café, school and park, with their news, photos, videos and events | Nextdoor, a local listings site |
-| [**php-migration**](php-migration) | Moving an Anahita PHP site into a new commons site | |
+| [**quartier**](quartier) | A neighbourhood's own: its people, and a channel for each of its local shops, businesses and facilities, with their news, photos, videos and events | Nextdoor, a local listings site |
+| [**php-migration**](php-migration) | Moving an Anahita PHP site into a new classique site | |
 
 Whether a site is open to anybody or for its members only, as a school or
 a company may need, is a choice inside any recipe.
@@ -46,7 +49,7 @@ recipe's README draws what it runs.
 ## Where to run one
 
 A server with 2 CPUs, 4 GB of memory and 40 GB of disk is enough to begin;
-`theatre` asks for more, for its videos. The recipes are written for Amazon
+`videotheque` asks for more, for its videos. The recipes are written for Amazon
 Web Services, OVHcloud and Hetzner: [docs/providers.md](docs/providers.md)
 says which have been tried, and others that should work.
 

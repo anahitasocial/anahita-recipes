@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-# Moves a site from Anahita PHP into a commons site, and thins it: the
+# Moves a site from Anahita PHP into a classique site, and thins it: the
 # tasks of php-migration's Makefile, which names each one. Made general from
 # what was done for banu.io in October 2026.
 #
-#   python3 -I migration/migrate.py <task> --site <commons folder> [--apply] [options]
+#   python3 -I migration/migrate.py <task> --site <classique folder> [--apply] [options]
 #
 # Every task that changes anything first counts what it would change, and
 # changes nothing; with --apply it does it. Every task that removes keeps a
@@ -54,7 +54,7 @@ class Site:
         self.secrets = env_file(os.path.join(folder, 'k8s', 'secrets.env'))
         self.domain = self.site.get('DOMAIN')
         if not self.domain:
-            sys.exit(f'No site in {folder}: name the commons folder with SITE=, after its make init.')
+            sys.exit(f'No site in {folder}: name the classique folder with SITE=, after its make init.')
         self.kubeconfig = os.path.expanduser(f'~/.kube/{self.domain}.yaml')
         self.kubectl_base = ['kubectl', '--kubeconfig', self.kubeconfig, '--context', self.domain, '-n', 'anahita']
         self.bucket = self.config.get('STORAGE_BUCKET', 'anahita')
@@ -662,9 +662,9 @@ TASKS = {
     'no-author': task_no_author, 'move-photos': task_move_photos, 'groups': task_groups, 'sweep': task_sweep,
 }
 
-parser = argparse.ArgumentParser(description='Moves a site from Anahita PHP into a commons site, and thins it.')
+parser = argparse.ArgumentParser(description='Moves a site from Anahita PHP into a classique site, and thins it.')
 parser.add_argument('task', choices=TASKS)
-parser.add_argument('--site', required=True, help='the commons folder of the new site')
+parser.add_argument('--site', required=True, help='the classique folder of the new site')
 parser.add_argument('--apply', action='store_true', help='do it; without it, nothing changes')
 parser.add_argument('--as', dest='as_', default='', help='the administrator to sign in as, by handle')
 parser.add_argument('--dump', default='', help="the old site's database dump, .sql or .sql.gz")

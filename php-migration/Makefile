@@ -1,14 +1,14 @@
-# php-migration's tasks: moving a site from Anahita PHP into a commons site,
+# php-migration's tasks: moving a site from Anahita PHP into a classique site,
 # and thinning it. `make` alone lists them.
 #
 # Each task that changes anything first counts what it would change, and
 # changes nothing; the same task with -apply does it. Each that removes
 # keeps a copy of what it removes first, in kept/.
 #
-# SITE is the commons folder of the new site, ../commons unless said. Its
+# SITE is the classique folder of the new site, ../classique unless said. Its
 # tunnel must be open: make tunnel, there.
 
-SITE ?= ../commons
+SITE ?= ../classique
 MIGRATE = python3 -I migration/migrate.py --site $(SITE) \
   $(if $(AS),--as $(AS)) $(if $(DUMP),--dump $(DUMP)) $(if $(FILES),--files $(FILES)) \
   $(if $(BEFORE),--before $(BEFORE)) $(if $(KEEP),--keep $(KEEP)) $(if $(WHO),--who $(WHO)) \
