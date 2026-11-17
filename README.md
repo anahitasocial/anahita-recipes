@@ -21,7 +21,7 @@ Anahita is made, speaks it beside English.
 | [**classique**](classique) | A social network with everything Anahita does: notes, photos, videos and articles; groups, events and channels. The one to begin with when you are not sure |
 | [**café**](cafe) | Short posts and the conversation around them: people sharing notes and photos with those who follow them, for a town, a club or a field that wants to talk, not publish |
 | [**journal**](journal) | Long writing under each writer's own name: articles with their covers, and notes and photos beside them, for writers and the people who follow them |
-| [**galerie**](galerie) | Photos first: each person's photo posts, a series in one, and the conversation under them, for photographers, a camera club or an art school |
+| [**galerie**](galerie) | Photos first: each person's own, one or a series in each post, and the conversation under them, for photographers, a camera club or an art school |
 | [**vidéothèque**](videotheque) | Video and sound, each person's own: lectures, concerts, music and talks of up to an hour, and the replies under them |
 | [**rendez-vous**](rendez-vous) | Meetups and events: groups that organise them, who is going, and notes, photos and topics around them. Nothing is sold: there are no tickets |
 | [**forum**](forum) | Discussions that last: groups as boards, topics in them and the replies under them, where an old answer is found as easily as a new one |
