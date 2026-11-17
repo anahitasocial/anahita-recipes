@@ -25,7 +25,7 @@ Anahita is made, speaks it beside English.
 | [**vidéothèque**](videotheque) | Video and sound: lectures, music, each person's own | YouTube, PeerTube |
 | [**rendez-vous**](rendez-vous) | Meetups and events, with groups to host them | Meetup, Luma |
 | [**forum**](forum) | Discussions that last: groups as boards, topics in them and the replies under them | Discourse, NodeBB |
-| [**quartier**](quartier) | A neighbourhood's own: its people, and a channel for each of its local shops, businesses and facilities, with their news, photos, videos and events | Nextdoor, a local listings site |
+| [**quartier**](quartier) | A neighbourhood online, run by its own people: each local shop, business and facility has a channel for its news, photos, videos and events, and one neighbourhood's site follows the next | |
 | [**php-migration**](php-migration) | Moving an Anahita PHP site into a new classique site | |
 
 Whether a site is open to anybody or for its members only, as a school or
