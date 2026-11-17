@@ -16,17 +16,17 @@ no knowledge of Kubernetes to follow one.
 Their names are French, as recipes' often are, and as Canada, where
 Anahita is made, speaks it beside English.
 
-| Recipe | For | Like |
-| --- | --- | --- |
-| [**classique**](classique) | A social network with everything: notes, photos, videos, articles, groups and events. The one to begin with | Mastodon and Pixelfed, but more |
-| [**café**](cafe) | Short posts and the conversation around them: people, their notes and photos | Mastodon, Bluesky |
-| [**journal**](journal) | Long writing: articles, with notes and photos beside them | WordPress, Medium |
-| [**galerie**](galerie) | Photos, and the words that go with them: people and their photo posts, and the replies under them | Pixelfed, Instagram |
-| [**vidéothèque**](videotheque) | Video and sound: lectures, music, each person's own | YouTube, PeerTube |
-| [**rendez-vous**](rendez-vous) | Meetups and events, with groups to host them | Meetup, Luma |
-| [**forum**](forum) | Discussions that last: groups as boards, topics in them and the replies under them | Discourse, NodeBB |
-| [**quartier**](quartier) | A neighbourhood online, run by its own people: each local shop, business and facility has a channel for its news, photos, videos and events, and one neighbourhood's site follows the next | |
-| [**php-migration**](php-migration) | Moving an Anahita PHP site into a new classique site | |
+| Recipe | What it is |
+| --- | --- |
+| [**classique**](classique) | A social network with everything Anahita does: notes, photos, videos and articles; groups, events and channels. The one to begin with when you are not sure |
+| [**café**](cafe) | Short posts and the conversation around them: people sharing notes and photos with those who follow them, for a town, a club or a field that wants to talk, not publish |
+| [**journal**](journal) | Long writing under each writer's own name: articles with their covers, and notes and photos beside them, for writers and the people who follow them |
+| [**galerie**](galerie) | Photos first: each person's photo posts, a series in one, and the conversation under them, for photographers, a camera club or an art school |
+| [**vidéothèque**](videotheque) | Video and sound, each person's own: lectures, concerts, music and talks of up to an hour, and the replies under them |
+| [**rendez-vous**](rendez-vous) | Meetups and events: groups that organise them, who is going, and notes, photos and topics around them. Nothing is sold: there are no tickets |
+| [**forum**](forum) | Discussions that last: groups as boards, topics in them and the replies under them, where an old answer is found as easily as a new one |
+| [**quartier**](quartier) | A neighbourhood online, run by its own people: each local shop, business and facility has a channel for its news, photos, videos and events, and one neighbourhood's site follows the next |
+| [**php-migration**](php-migration) | Moving an Anahita PHP site into a new classique site |
 
 Whether a site is open to anybody or for its members only, as a school or
 a company may need, is a choice inside any recipe.

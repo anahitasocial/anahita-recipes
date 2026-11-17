@@ -2,7 +2,7 @@
 
 Articles first, for writers: long writing with a title and a cover, notes
 beside it for what does not need an article, and photos. Each person
-writes under their own name, as on Medium or WordPress.com. Newsrooms
+writes under their own name, and is followed for it. Newsrooms
 and schools will have recipes of their own; until then, one that
 publishes together, in groups, can begin with [`classique`](../classique).
 No groups, topics, events or channels, and no videos, GIFs or sound. With
@@ -44,9 +44,9 @@ place.
 
 | Setting | journal chooses | Why |
 | --- | --- | --- |
-| `instance.json` | People; notes, articles and photos | What a journal is for, as on Medium or WordPress.com: writers, not groups. Groups, topics, events and channels are in no menu, composer or tab, and the services refuse them |
+| `instance.json` | People; notes, articles and photos | What a journal is for: writers, each under their own name, not groups. Groups, topics, events and channels are in no menu, composer or tab, and the services refuse them |
 | `REGISTRATION_MODE` | `approval` | Anybody may ask to join, and an administrator says yes, so that a new site is not filled by strangers before its rules are written |
-| `SITE_READ_ACCESS` | `public` | What is public may be read by anybody, as on Mastodon |
+| `SITE_READ_ACCESS` | `public` | What is public may be read by anybody, signed in or not |
 | `FEDERATION_PROTOCOLS` | `activitypub,atproto` | Both networks. Each profile still chooses whether it federates |
 | `VIDEO_UPLOADS`, `AUDIO_UPLOADS` | `off` | No videos, GIFs or sound, said here as well as in `instance.json` |
 | `FILE_SWEEP` | `on` | Stored files that nothing names any more are removed every night |

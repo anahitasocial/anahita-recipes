@@ -43,10 +43,10 @@ place.
 
 | Setting | forum chooses | Why |
 | --- | --- | --- |
-| `instance.json` | People and groups; topics, and replies | What a forum is for, as on Discourse: boards, and the topics in them. Notes, articles, photo posts, events and channels are in no menu, composer or tab, and the services refuse them |
+| `instance.json` | People and groups; topics, and replies | What a forum is for: boards, and the topics in them. Notes, articles, photo posts, events and channels are in no menu, composer or tab, and the services refuse them |
 | `GROUPS_FROM` | `registered` | Anybody signed in starts the boards they need. `administrators` keeps boards to the site's administrators, so that it keeps its own shape |
 | `REGISTRATION_MODE` | `approval` | Anybody may ask to join, and an administrator says yes, so that a new site is not filled by strangers before its rules are written |
-| `SITE_READ_ACCESS` | `public` | What is public may be read by anybody, as on Mastodon |
+| `SITE_READ_ACCESS` | `public` | What is public may be read by anybody, signed in or not |
 | `FEDERATION_PROTOCOLS` | `activitypub,atproto` | Both networks. Each profile still chooses whether it federates |
 | `VIDEO_UPLOADS`, `AUDIO_UPLOADS` | `off` | No videos, GIFs or sound, said here as well as in `instance.json` |
 | `FILE_SWEEP` | `on` | Stored files that nothing names any more are removed every night |

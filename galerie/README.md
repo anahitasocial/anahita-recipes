@@ -1,7 +1,7 @@
 # galerie
 
 Photos, and the words that go with them: people and their photo posts, and
-the replies under them. No posts of words alone, as on Pixelfed or Flickr:
+the replies under them. No posts of words alone:
 no notes, articles or topics, no groups, events or channels, and no
 videos, GIFs or sound. For photographers, a camera club, an art school or
 a town that shows itself in pictures, with federation on ActivityPub and
@@ -41,9 +41,9 @@ place.
 
 | Setting | galerie chooses | Why |
 | --- | --- | --- |
-| `instance.json` | People; photos, and replies | What a galerie is for, as on Pixelfed: each person's own photos, and the conversation under them. Notes, articles, topics, groups, events and channels are in no menu, composer or tab, and the services refuse them |
+| `instance.json` | People; photos, and replies | What a galerie is for: each person's own photos, and the conversation under them. Notes, articles, topics, groups, events and channels are in no menu, composer or tab, and the services refuse them |
 | `REGISTRATION_MODE` | `approval` | Anybody may ask to join, and an administrator says yes, so that a new site is not filled by strangers before its rules are written |
-| `SITE_READ_ACCESS` | `public` | What is public may be read by anybody, as on Mastodon |
+| `SITE_READ_ACCESS` | `public` | What is public may be read by anybody, signed in or not |
 | `FEDERATION_PROTOCOLS` | `activitypub,atproto` | Both networks. Each profile still chooses whether it federates |
 | `VIDEO_UPLOADS`, `AUDIO_UPLOADS` | `off` | No videos, GIFs or sound, said here as well as in `instance.json` |
 | `PHOTO_MAX_FILES` | `20` | A series in one post, swiped through: the most there may be, said here so that it is easy to find and change |

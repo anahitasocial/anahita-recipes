@@ -45,7 +45,7 @@ place.
 | --- | --- | --- |
 | `instance.json` | People, channels and events; notes, photos and videos | Each place is a channel: its admins post as it and host its events, and it may read its website's feed, as the local paper's or the library's news. Groups, articles and topics are in no menu, composer or tab, and the services refuse them |
 | `REGISTRATION_MODE` | `approval` | Anybody may ask to join, and an administrator says yes, so that a new site is not filled by strangers before its rules are written |
-| `SITE_READ_ACCESS` | `public` | What is public may be read by anybody, as on Mastodon |
+| `SITE_READ_ACCESS` | `public` | What is public may be read by anybody, signed in or not |
 | `FEDERATION_PROTOCOLS` | `activitypub,atproto` | Both networks. Each profile still chooses whether it federates |
 | `CHANNELS_FROM`, `EVENTS_FROM` | `registered` | Anybody signed in makes a channel for their shop or clinic, and events. `administrators` keeps either to the site's administrators |
 | `VIDEO_UPLOADS` | `on` | Up to ten minutes and 500 MB, which one server of 4 GB manages |

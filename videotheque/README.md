@@ -42,9 +42,9 @@ place.
 
 | Setting | vidéothèque chooses | Why |
 | --- | --- | --- |
-| `instance.json` | People; videos and sound, and replies | What a vidéothèque is for, as on YouTube: each person's videos on their own profile, not groups. Groups, events, channels, articles, topics and photo posts are in no menu, composer or tab, and the services refuse them |
+| `instance.json` | People; videos and sound, and replies | What a vidéothèque is for: each person's videos on their own profile, not groups. Groups, events, channels, articles, topics and photo posts are in no menu, composer or tab, and the services refuse them |
 | `REGISTRATION_MODE` | `approval` | Anybody may ask to join, and an administrator says yes, so that a new site is not filled by strangers before its rules are written |
-| `SITE_READ_ACCESS` | `public` | What is public may be read by anybody, as on Mastodon |
+| `SITE_READ_ACCESS` | `public` | What is public may be read by anybody, signed in or not |
 | `FEDERATION_PROTOCOLS` | `activitypub,atproto` | Both networks. Each profile still chooses whether it federates |
 | `VIDEO_UPLOADS`, `AUDIO_UPLOADS` | `on`; videos up to an hour and 4 GB | Long enough for a lecture or a concert, on the larger server below |
 | `FILE_SWEEP` | `on` | Stored files that nothing names any more are removed every night |

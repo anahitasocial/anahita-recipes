@@ -41,7 +41,7 @@ place.
 | --- | --- | --- |
 | `instance.json` | People, groups and events; notes, photos and topics | What a rendez-vous is for. Articles and channels are in no menu, composer or tab, and the services refuse them |
 | `REGISTRATION_MODE` | `approval` | Anybody may ask to join, and an administrator says yes, so that a new site is not filled by strangers before its rules are written |
-| `SITE_READ_ACCESS` | `public` | What is public may be read by anybody, as on Mastodon |
+| `SITE_READ_ACCESS` | `public` | What is public may be read by anybody, signed in or not |
 | `FEDERATION_PROTOCOLS` | `activitypub,atproto` | Both networks. Each profile still chooses whether it federates |
 | `GROUPS_FROM`, `EVENTS_FROM` | `registered` | Anybody signed in organises their own groups and events. `administrators` keeps either to the site's administrators |
 | `VIDEO_UPLOADS`, `AUDIO_UPLOADS` | `off` | No videos, GIFs or sound, said here as well as in `instance.json` |

@@ -1,7 +1,7 @@
 # café
 
 Short posts and the conversation around them: people, their notes and
-their photos, as on Mastodon or Bluesky. No groups, events or channels, no
+their photos, shared with those who follow them. No groups, events or channels, no
 articles or topics, and no videos, GIFs or sound. For a town, a club or a
 field that wants to talk, not publish, with federation on ActivityPub and
 AT Protocol, so that people on Mastodon, Pixelfed, Bluesky and the rest of
@@ -37,9 +37,9 @@ place.
 
 | Setting | café chooses | Why |
 | --- | --- | --- |
-| `instance.json` | People; notes and photos | What a café is for, as on Mastodon or Bluesky. Groups, events, channels, articles and topics are in no menu, composer or tab, and the services refuse them |
+| `instance.json` | People; notes and photos | What a café is for: people talking, in short posts and replies. Groups, events, channels, articles and topics are in no menu, composer or tab, and the services refuse them |
 | `REGISTRATION_MODE` | `approval` | Anybody may ask to join, and an administrator says yes, so that a new site is not filled by strangers before its rules are written |
-| `SITE_READ_ACCESS` | `public` | What is public may be read by anybody, as on Mastodon |
+| `SITE_READ_ACCESS` | `public` | What is public may be read by anybody, signed in or not |
 | `FEDERATION_PROTOCOLS` | `activitypub,atproto` | Both networks. Each profile still chooses whether it federates |
 | `VIDEO_UPLOADS`, `AUDIO_UPLOADS` | `off` | No videos, GIFs or sound, said here as well as in `instance.json` |
 | `FILE_SWEEP` | `on` | Stored files that nothing names any more are removed every night |
