@@ -43,6 +43,7 @@ place.
 | `REGISTRATION_MODE` | `approval` | Anybody may ask to join, and an administrator says yes, so that a new site is not filled by strangers before its rules are written |
 | `SITE_READ_ACCESS` | `public` | What is public may be read by anybody, as on Mastodon |
 | `FEDERATION_PROTOCOLS` | `activitypub,atproto` | Both networks. Each profile still chooses whether it federates |
+| `GROUPS_FROM`, `EVENTS_FROM` | `registered` | Anybody signed in organises their own groups and events. `administrators` keeps either to the site's administrators |
 | `VIDEO_UPLOADS`, `AUDIO_UPLOADS` | `off` | No videos, GIFs or sound, said here as well as in `instance.json` |
 | `FILE_SWEEP` | `on` | Stored files that nothing names any more are removed every night |
 | Files | Garage, on the server | No other account needed |

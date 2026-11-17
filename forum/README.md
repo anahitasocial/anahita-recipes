@@ -1,9 +1,9 @@
 # forum
 
 Discussions that last: people, the groups that hold them, and topics with
-the replies under them. A group is a board, made by the site's
-administrators; anybody who follows one starts topics in it, and anybody
-may reply. No notes, articles or photo posts, no events or channels, and
+the replies under them. A group is a board, which anybody signed in may
+make; anybody who follows one starts topics in it, and anybody may
+reply. No notes, articles or photo posts, no events or channels, and
 no videos, GIFs or sound. With federation on ActivityPub and AT Protocol,
 so that people on Mastodon, Bluesky and the rest of the Atmosphere can
 follow and reply. Named after the forum of a Roman town, its square,
@@ -44,7 +44,7 @@ place.
 | Setting | forum chooses | Why |
 | --- | --- | --- |
 | `instance.json` | People and groups; topics, and replies | What a forum is for, as on Discourse: boards, and the topics in them. Notes, articles, photo posts, events and channels are in no menu, composer or tab, and the services refuse them |
-| `GROUPS_FROM` | `administrators` | The site makes its boards, so that it keeps its own shape; `registered` lets everybody make one |
+| `GROUPS_FROM` | `registered` | Anybody signed in starts the boards they need. `administrators` keeps boards to the site's administrators, so that it keeps its own shape |
 | `REGISTRATION_MODE` | `approval` | Anybody may ask to join, and an administrator says yes, so that a new site is not filled by strangers before its rules are written |
 | `SITE_READ_ACCESS` | `public` | What is public may be read by anybody, as on Mastodon |
 | `FEDERATION_PROTOCOLS` | `activitypub,atproto` | Both networks. Each profile still chooses whether it federates |

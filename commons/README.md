@@ -36,6 +36,7 @@ place.
 | `REGISTRATION_MODE` | `approval` | Anybody may ask to join, and an administrator says yes, so that a new site is not filled by strangers before its rules are written |
 | `SITE_READ_ACCESS` | `public` | What is public may be read by anybody, as on Mastodon |
 | `FEDERATION_PROTOCOLS` | `activitypub,atproto` | Both networks. Each profile still chooses whether it federates |
+| `GROUPS_FROM`, `CHANNELS_FROM`, `EVENTS_FROM` | `registered` | Anybody signed in makes their own groups, channels and events. `administrators` keeps any of them to the site's administrators |
 | `VIDEO_UPLOADS` | `on` | Up to ten minutes and 500 MB, which one server of 4 GB manages |
 | `FILE_SWEEP` | `on` | Stored files that nothing names any more are removed every night |
 | Files | Garage, on the server | No other account needed |

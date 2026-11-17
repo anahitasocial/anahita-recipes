@@ -22,6 +22,7 @@ no knowledge of Kubernetes to follow one.
 | [**theatre**](theatre) | Video and sound: lectures, music, each person's own | YouTube, PeerTube |
 | [**gathering**](gathering) | Meetups and events, with groups to host them | Meetup, Luma |
 | [**forum**](forum) | Discussions that last: groups as boards, topics in them and the replies under them | Discourse, NodeBB |
+| [**neighbourhood**](neighbourhood) | A neighbourhood's own: its people, and a channel for each clinic, library, shop, café, school and park, with their news, photos, videos and events | Nextdoor, a local listings site |
 | [**php-migration**](php-migration) | Moving an Anahita PHP site into a new commons site | |
 
 Whether a site is open to anybody or for its members only, as a school or

@@ -56,6 +56,7 @@ RECIPES = {
     "gathering": ["photos"] + SOCIAL,
     "gallery": ["photos"] + SOCIAL,
     "forum": SOCIAL,
+    "neighbourhood": EVERYTHING,
 }
 
 # The colours: slate for the frame and the words, one colour for each kind
@@ -407,11 +408,20 @@ SAYS = {
 START, END = "<!-- what-runs:start -->", "<!-- what-runs:end -->"
 
 
+def video_says(recipe):
+    """Video-service's sentence: without sound where the recipe's
+    instance.json offers videos alone."""
+    kinds = offers(recipe).get("video-service")
+    if kinds and "audio" not in kinds:
+        return "Video and GIF posts; video-worker makes each ready for every screen."
+    return SAYS["video"]
+
+
 def table(recipe, offered):
     rows = [("web-shell", SAYS["web-shell"])]
     _, own = always_for(recipe)
     rows += [(name, own.get(name, SAYS[name])) for name, _ in ALWAYS + SHARED]
-    rows += [(OPTIONAL[key][1], SAYS[key]) for key in offered]
+    rows += [(OPTIONAL[key][1], video_says(recipe) if key == "video" else SAYS[key]) for key in offered]
     lines = ["| Service | What it does |", "| --- | --- |"]
     lines += [f"| {', '.join(f'`{n.strip()}`' for n in names.split(','))} | {says} |" for names, says in rows]
     return (START + "\n\n**What each service does,** of those it runs:\n\n" + "\n".join(lines) + "\n\n" + END)
