@@ -172,8 +172,9 @@ committed.
 | `make mail-off` | Stops every email at once; `make mail-on` sends again |
 
 A logo of your own goes in `web/brand/` (`logo-512.png`, and the others
-`web/build.sh` names), a theme in `web/theme/` (anahita-web's
-`docs/customising.md`); then `make web`.
+`web/build.sh` names), a theme in `web/theme/`
+([Your own theme, step by step](https://github.com/anahitasocial/anahita-web/blob/main/docs/customising.md#your-own-theme-step-by-step), in anahita-web's docs); then
+`make web`.
 
 ## Upgrading
 

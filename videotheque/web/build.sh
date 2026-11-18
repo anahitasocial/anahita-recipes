@@ -7,7 +7,8 @@
 # the domain in site.env. What is in web/ is put in, when it is there:
 #
 #   web/theme/   a theme of your own (anahita-web's docs/customising.md,
-#                Themes): a copy of src/assets/default, changed
+#                Your own theme, step by step): the default theme, with
+#                your logo, colours and pages
 #   web/legal/   your Terms of Service and Privacy Policy, in place of
 #                anahita-web's starting ones (tos.md, privacy.md, index.js)
 #   web/brand/   your logo and icons: logo-512.png, and if you have them,
