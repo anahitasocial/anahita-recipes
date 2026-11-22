@@ -438,6 +438,10 @@ def task_database(site, args):
         print('More than the first administrator: is this the site you mean? Try it on a site made for trying first.')
     looked(args)
     confirm(site, f'Everything in {site.domain}\'s database goes.')
+    # A copy of it first, in the site's files, waited for: what goes can be
+    # put back (make backup in the site's folder).
+    print(f'Backing up {site.domain}\'s database first...')
+    subprocess.run(['make', '-C', site.folder, 'backup'], check=True)
     site.mysql('DROP DATABASE IF EXISTS anahita; CREATE DATABASE anahita CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;', database='')
     site.load(dump, 'anahita')
     print('Loaded: ' + ', '.join(f'{t} {n}' for t, n in counted(site, 'anahita')))

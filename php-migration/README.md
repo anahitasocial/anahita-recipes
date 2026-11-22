@@ -58,7 +58,8 @@ If the new site's folder is not `../classique`, name it on each task:
    dump and the files where they cannot be changed.
 2. **`make database DUMP=old-site.sql.gz`,** then
    **`make database-apply DUMP=old-site.sql.gz`.** Replaces the new site's
-   database with the old one, after you type the domain, then runs the
+   database with the old one, after you type the domain and the site's
+   `make backup` has copied the database as it was, then runs the
    migration job, which finds the PHP tables and upgrades them, and starts
    every service again. The first super administrator `make init` made is
    replaced too: from here on, you sign in as the old site's administrators,

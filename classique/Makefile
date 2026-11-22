@@ -91,9 +91,12 @@ logs: tunnel-open
 	@test -n "$(SERVICE)" || { echo "Name it: make logs SERVICE=auth-service"; exit 1; }
 	$(KUBECTL) -n anahita logs deployment/$(SERVICE) --since=1h
 
-## backup: copies the database into the files now, as is done every night at 03:30 UTC
+## backup: copies the database into the files now, and waits until it is done; every night at 03:30 UTC too
 backup: tunnel-open
-	$(KUBECTL) -n anahita create job --from=cronjob/mysql-backup mysql-backup-$$(date -u +%Y%m%d-%H%M%S)
+	@job=mysql-backup-$$(date -u +%Y%m%d-%H%M%S); \
+	$(KUBECTL) -n anahita create job --from=cronjob/mysql-backup $$job && \
+	$(KUBECTL) -n anahita wait --for=condition=complete job/$$job --timeout=15m && \
+	echo "Backed up, as $$job: under backups/mysql/ in the site's files."
 
 ## mail-off: stops every email the site sends, at once (mail-on, or apply, sends again)
 mail-off: tunnel-open
@@ -120,4 +123,4 @@ upgrade:
 	perl -pi -e 's/\Q$(ANAHITA_VERSION)\E/$(VERSION)/g' k8s/kustomization.yml
 	@echo "k8s/kustomization.yml names $(VERSION). Read what it needs:"
 	@echo "  https://github.com/anahitasocial/anahita-services/blob/$(VERSION)/CHANGELOG.md"
-	@echo "then make apply."
+	@echo "then make backup, and make apply."

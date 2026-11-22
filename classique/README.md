@@ -174,12 +174,14 @@ A logo of your own goes in `web/brand/` (`logo-512.png`, and the others
 
 ```sh
 make upgrade v1.2.4
+make backup
 make apply
 ```
 
 `make upgrade` changes the version on every line of
 `k8s/kustomization.yml`, and names the release's notes: read what it needs
-before `make apply`. The database is upgraded as the new version starts.
+before `make apply`. `make backup` copies the database first, and waits
+until the copy is done. The database is upgraded as the new version starts.
 
 ## Backups
 
