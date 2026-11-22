@@ -45,14 +45,14 @@ place.
 | `FILE_SWEEP` | `on` | Stored files that nothing names any more are removed every night |
 | Files | Garage, on the server | No other account needed |
 
-It runs what it offers, with MySQL, Redis, RabbitMQ and Garage on the same
+It runs what it offers, with MySQL, Valkey, RabbitMQ and Garage on the same
 server, at the version named in [k8s/kustomization.yml](k8s/kustomization.yml).
 
 ![One server running k3s. Traefik takes every request and hands it to the
 gateway, or to web-shell for the web app. Twelve services always run, with
 three shared over gRPC; six others, dashed, run because a café
 offers what they bring. Video and channels' website feeds are not run. MySQL,
-Redis, RabbitMQ and Garage keep the data, and four jobs run by the clock
+Valkey, RabbitMQ and Garage keep the data, and four jobs run by the clock
 or once.](images/what-runs.svg)
 
 Anahita is small services, each doing one thing, so a site runs only what
@@ -185,7 +185,7 @@ before `make apply`. The database is upgraded as the new version starts.
 
 1. **The database** is copied every night at 03:30 UTC into the site's
    files, under `backups/mysql/`; `make backup` does it at once.
-   anahita-services' `docs/deploying.md`, under "Database, Redis and
+   anahita-services' `docs/deploying.md`, under "Database, Valkey and
    RabbitMQ", says how to restore one.
 2. **The whole server:** AWS keeps a snapshot of the disk every day, for
    seven days (`deploy/aws/`). At Hetzner and OVHcloud, turn on their

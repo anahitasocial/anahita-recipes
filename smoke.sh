@@ -69,7 +69,7 @@ why() {
   [ $? = 0 ] && return
   echo; echo "== Why: the pods, the Jobs' logs, the latest events, the machine"
   $K get pods -o wide || true
-  for store in mysql redis rabbitmq garage; do
+  for store in mysql valkey rabbitmq garage; do
     echo "-- $store"; $K logs "statefulset/$store" --tail=60 --all-containers || true
   done
   echo "-- inside mysql-0: the open-files limits, and what runs"
@@ -94,8 +94,8 @@ why() {
 }
 trap why EXIT
 
-step "The stores: MySQL, Redis, RabbitMQ and Garage"
-for store in mysql redis rabbitmq garage; do
+step "The stores: MySQL, Valkey, RabbitMQ and Garage"
+for store in mysql valkey rabbitmq garage; do
   $K rollout status "statefulset/$store" --timeout=300s
 done
 

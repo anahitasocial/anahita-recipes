@@ -87,7 +87,7 @@ KIND = {
     "search-service": "finding", "hashtag-service": "finding", "location-service": "finding",
     "auth-service": "safety", "abuse-report-service": "safety",
 }
-STORES = [("MySQL", "everything kept", "#00758F", False), ("Redis", "sessions", "#DC2626", False),
+STORES = [("MySQL", "everything kept", "#00758F", False), ("Valkey", "sessions", "#DC2626", False),
           ("RabbitMQ", "the services' events", "#F97316", False),
           ("Garage", "files, or a store outside", "#0D9488", True)]
 JOBS = ["migration-job: at each version", "account-sweeper: every 10 min",
@@ -369,7 +369,7 @@ def draw(recipe, offered):
             f"The gateway routes the API to {len(ALWAYS)} services that always run, each with what it gives: "
             + "; ".join(f"{n}, {g}" for n, g in always)
             + f". Three are shared over gRPC: the graph, files and email. {len(picks)} others, drawn dashed, run "
-            f"because {article(recipe)} offers what they bring: {brings}.{gone} MySQL, Redis, RabbitMQ and Garage keep the "
+            f"because {article(recipe)} offers what they bring: {brings}.{gone} MySQL, Valkey, RabbitMQ and Garage keep the "
             f"data; four jobs run by the clock or once. Outside the server: a mail provider, an object store if not "
             f"Garage, and DNS.")
     marker = ('<marker id="{0}" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" '
